@@ -24,8 +24,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index-2.html"><img src="images/logo.svg" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index-2.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -401,12 +401,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index-2.html">
+            <a class="nav-link" href="index.html">
               <i class="fa fa-home menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="pages/widgets.html">
               <i class="fa fa-puzzle-piece menu-icon"></i>
               <span class="menu-title">Widgets</span>
@@ -667,6 +667,62 @@
               <i class="far fa-file-alt menu-icon"></i>
               <span class="menu-title">Documentation</span>
             </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">Member Management</span>
+            </a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+            <i class="fab fa-trello menu-icon"></i>
+            <span class="menu-title">Report</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="page-layouts">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="/pages/report/dailyStats.html">Daily
+                  statistic report</a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/report/gamereport.html">Game report</a></li>
+              <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/report/GGRMember.html">GGR report
+                  by member</a></li>
+              <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/report/memberBalance.html">Promotion
+                  Report</a></li>
+              <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/report/promotionReport.html">Member
+                  Balance report</a></li>
+            </ul>
+          </div>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">Admin Settings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">Referral settings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">CMS settings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">Transactions</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/memberManagement.html">
+              <i class="far fa-file-alt menu-icon"></i>
+              <span class="menu-title">settings</span>
+            </a>
           </li>
         </ul>
       </nav>
@@ -678,7 +734,7 @@
               Dashboard
             </h3>
           </div>
-          <div class="row grid-margin">
+          <!-- <div class="row grid-margin">
             <div class="col-12">
               <div class="card card-statistics">
                 <div class="card-body">
@@ -686,7 +742,7 @@
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fa fa-user mr-2"></i>
-                          New users
+                          total deposited players
                         </p>
                         <h2>54000</h2>
                         <label class="badge badge-outline-success badge-pill">2.7% increase</label>
@@ -730,6 +786,64 @@
                         </p>
                         <h2>7500</h2>
                         <label class="badge badge-outline-danger badge-pill">16% decrease</label>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="row grid-margin">
+            <div class="col-12">
+              <div class="card card-statistics">
+                <div class="card-body">
+                  <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fa fa-user mr-2"></i>
+                          Total deposit 
+                        </p>
+                        <h2 id="total-deposited-players"></h2>
+                        <!-- <label class="badge badge-outline-success badge-pill" id="total-deposited-players-type">2.7% increase</label> -->
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-hourglass-half mr-2"></i>
+                           Total GGR
+                        </p>
+                        <h2 id="total-gross-gaming-revenue"></h2>
+                        <!-- <label class="badge badge-outline-danger badge-pill" id="total-gross-gaming-revenue-type">30% decrease</label> -->
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-wallet mr-2"></i>
+                          Total balance
+                        </p>
+                        <h2 id="total-player-balance"></h2>
+                        <!-- <label class="badge badge-outline-success badge-pill" id="total-player-balance-type">12% increase</label> -->
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-check-circle mr-2"></i>
+                          Total wagered 
+                        </p>
+                        <h2 id="total-wagered-ranking"></h2>
+                        <!-- <label class="badge badge-outline-success badge-pill" id="total-wagered-ranking-type">57% increase</label> -->
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-solid fa-trophy mr-2"></i>
+                          Total win 
+                        </p>
+                        <h2 id="total-win-ranking"></h2>
+                        <!-- <label class="badge badge-outline-success badge-pill" id="total-win-ranking-type">10% increase</label> -->
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-circle-notch mr-2"></i>
+                          Total lose 
+                        </p>
+                        <h2 id="total-lose-ranking"></h2>
+                        <!-- <label class="badge badge-outline-danger badge-pill" id="total-lose-ranking-type">16% decrease</label> -->
                       </div>
                   </div>
                 </div>
@@ -840,7 +954,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
@@ -977,8 +1091,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <div class="col-md-8 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -1073,7 +1187,88 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4 grid-margin stretch-card">
+            </div> -->
+          <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <i class="fas fa-table"></i>
+                   Pending Withdrawals
+                  </h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Customer</th>
+                          <th>Item code</th>
+                          <th>Orders</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pendingWithdrawals">
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <i class="fas fa-table"></i>
+                  Pending claim approvals
+                  </h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Customer</th>
+                          <th>Item code</th>
+                          <th>Orders</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pendingClaim">
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <i class="fas fa-table"></i>
+                Pending deposit approvals
+                  </h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Customer</th>
+                          <th>Item code</th>
+                          <th>Orders</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pendingDeposit">
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -1278,7 +1473,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

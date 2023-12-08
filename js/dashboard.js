@@ -1,13 +1,14 @@
-(function($) {
-  'use strict';
-  $(function() {
-    if ($("#orders-chart").length) {
-      var currentChartCanvas = $("#orders-chart").get(0).getContext("2d");
+;(function ($) {
+  'use strict'
+  $(function () {
+    if ($('#orders-chart').length) {
+      var currentChartCanvas = $('#orders-chart').get(0).getContext('2d')
       var currentChart = new Chart(currentChartCanvas, {
         type: 'bar',
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [
+            {
               label: 'Delivered',
               data: [260, 380, 230, 400, 780, 530, 340, 200, 400, 650, 780, 500],
               backgroundColor: '#392c70'
@@ -31,26 +32,30 @@
             }
           },
           scales: {
-            yAxes: [{
-              gridLines: {
-                drawBorder: false,
-              },
-              ticks: {
-                stepSize: 250,
-                fontColor: "#686868"
+            yAxes: [
+              {
+                gridLines: {
+                  drawBorder: false
+                },
+                ticks: {
+                  stepSize: 250,
+                  fontColor: '#686868'
+                }
               }
-            }],
-            xAxes: [{
-              stacked: true,
-              ticks: {
-                beginAtZero: true,
-                fontColor: "#686868"
-              },
-              gridLines: {
-                display: false,
-              },
-              barPercentage: 0.4
-            }]
+            ],
+            xAxes: [
+              {
+                stacked: true,
+                ticks: {
+                  beginAtZero: true,
+                  fontColor: '#686868'
+                },
+                gridLines: {
+                  display: false
+                },
+                barPercentage: 0.4
+              }
+            ]
           },
           legend: {
             display: false
@@ -60,65 +65,69 @@
               radius: 0
             }
           },
-          legendCallback: function(chart) { 
-            var text = [];
-            text.push('<ul class="legend'+ chart.id +'">');
+          legendCallback: function (chart) {
+            var text = []
+            text.push('<ul class="legend' + chart.id + '">')
             for (var i = 0; i < chart.data.datasets.length; i++) {
-              text.push('<li><span class="legend-label" style="background-color:' + chart.data.datasets[i].backgroundColor + '"></span>');
+              text.push(
+                '<li><span class="legend-label" style="background-color:' +
+                  chart.data.datasets[i].backgroundColor +
+                  '"></span>'
+              )
               if (chart.data.datasets[i].label) {
-                text.push(chart.data.datasets[i].label);
+                text.push(chart.data.datasets[i].label)
               }
-              text.push('</li>');
+              text.push('</li>')
             }
-            text.push('</ul>');
-            return text.join("");
-          },
+            text.push('</ul>')
+            return text.join('')
+          }
         }
-      });
-      document.getElementById('orders-chart-legend').innerHTML = currentChart.generateLegend();
+      })
+      document.getElementById('orders-chart-legend').innerHTML = currentChart.generateLegend()
     }
     if ($('#sales-chart').length) {
-      var lineChartCanvas = $("#sales-chart").get(0).getContext("2d");
+      var lineChartCanvas = $('#sales-chart').get(0).getContext('2d')
       var data = {
-        labels: ["2013", "2014", "2014", "2015", "2016", "2017", "2018"],
+        labels: ['2013', '2014', '2014', '2015', '2016', '2017', '2018'],
         datasets: [
           {
             label: 'Support',
             data: [1500, 7030, 1050, 2300, 3510, 6800, 4500],
-            borderColor: [
-              '#392c70'
-            ],
+            borderColor: ['#392c70'],
             borderWidth: 3,
             fill: false
           },
           {
             label: 'Product',
             data: [5500, 4080, 3050, 5600, 4510, 5300, 2400],
-            borderColor: [
-              '#d1cede'
-            ],
+            borderColor: ['#d1cede'],
             borderWidth: 3,
             fill: false
           }
         ]
-      };
+      }
       var options = {
         scales: {
-          yAxes: [{
-            gridLines: {
-              drawBorder: false
-            },
-            ticks: {
-              stepSize: 2000,
-              fontColor: "#686868"
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: false
+              },
+              ticks: {
+                stepSize: 2000,
+                fontColor: '#686868'
+              }
             }
-          }],
-          xAxes: [{
-            display: false,
-            gridLines: {
-              drawBorder: false
+          ],
+          xAxes: [
+            {
+              display: false,
+              gridLines: {
+                drawBorder: false
+              }
             }
-          }]
+          ]
         },
         legend: {
           display: false
@@ -129,41 +138,28 @@
           }
         },
         stepsize: 1
-      };
+      }
       var lineChart = new Chart(lineChartCanvas, {
         type: 'line',
         data: data,
         options: options
-      });
+      })
     }
-    if ($("#sales-status-chart").length) {
-      var pieChartCanvas = $("#sales-status-chart").get(0).getContext("2d");
+    if ($('#sales-status-chart').length) {
+      var pieChartCanvas = $('#sales-status-chart').get(0).getContext('2d')
       var pieChart = new Chart(pieChartCanvas, {
         type: 'pie',
         data: {
-          datasets: [{
-            data: [75, 25, 15, 10],
-            backgroundColor: [
-              '#392c70',
-              '#04b76b',
-              '#ff5e6d',
-              '#eeeeee'
-            ],
-            borderColor: [
-              '#392c70',
-              '#04b76b',
-              '#ff5e6d',
-              '#eeeeee'
-            ],
-          }],
-      
+          datasets: [
+            {
+              data: [75, 25, 15, 10],
+              backgroundColor: ['#392c70', '#04b76b', '#ff5e6d', '#eeeeee'],
+              borderColor: ['#392c70', '#04b76b', '#ff5e6d', '#eeeeee']
+            }
+          ],
+
           // These labels appear in the legend and in the tooltips when hovering different arcs
-          labels: [
-            'Active users',
-            'Subscribers',
-            'New visitors',
-            'Others'
-          ]
+          labels: ['Active users', 'Subscribers', 'New visitors', 'Others']
         },
         options: {
           responsive: true,
@@ -174,45 +170,45 @@
           legend: {
             display: false
           },
-          legendCallback: function(chart) { 
-            var text = [];
-            text.push('<ul class="legend'+ chart.id +'">');
+          legendCallback: function (chart) {
+            var text = []
+            text.push('<ul class="legend' + chart.id + '">')
             for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
-              text.push('<li><span class="legend-label" style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></span>');
+              text.push(
+                '<li><span class="legend-label" style="background-color:' +
+                  chart.data.datasets[0].backgroundColor[i] +
+                  '"></span>'
+              )
               if (chart.data.labels[i]) {
-                text.push(chart.data.labels[i]);
+                text.push(chart.data.labels[i])
               }
-              text.push('<label class="badge badge-light badge-pill legend-percentage ml-auto">'+ chart.data.datasets[0].data[i] + '%</label>');
-              text.push('</li>');
+              text.push(
+                '<label class="badge badge-light badge-pill legend-percentage ml-auto">' +
+                  chart.data.datasets[0].data[i] +
+                  '%</label>'
+              )
+              text.push('</li>')
             }
-            text.push('</ul>');
-            return text.join("");
+            text.push('</ul>')
+            return text.join('')
           }
         }
-      });
-      document.getElementById('sales-status-chart-legend').innerHTML = pieChart.generateLegend();
+      })
+      document.getElementById('sales-status-chart-legend').innerHTML = pieChart.generateLegend()
     }
-    if ($("#daily-sales-chart").length) {
+    if ($('#daily-sales-chart').length) {
       var dailySalesChartData = {
-        datasets: [{
-          data: [50, 10, 10, 30],
-          backgroundColor: [
-            '#392c70',
-            '#04b76b',
-            '#e9e8ef',
-            '#ff5e6d'
-          ],
-          borderWidth: 0
-        }],
-    
+        datasets: [
+          {
+            data: [50, 10, 10, 30],
+            backgroundColor: ['#392c70', '#04b76b', '#e9e8ef', '#ff5e6d'],
+            borderWidth: 0
+          }
+        ],
+
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-          'Mail order sales',
-          'Instore sales',
-          'Download sales',
-          'Sales return'
-        ]
-      };
+        labels: ['Mail order sales', 'Instore sales', 'Download sales', 'Sales return']
+      }
       var dailySalesChartOptions = {
         responsive: true,
         maintainAspectRatio: true,
@@ -223,34 +219,115 @@
         legend: {
           display: false
         },
-        legendCallback: function(chart) { 
-          var text = [];
-          text.push('<ul class="legend'+ chart.id +'">');
+        legendCallback: function (chart) {
+          var text = []
+          text.push('<ul class="legend' + chart.id + '">')
           for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
-            text.push('<li><span class="legend-label" style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></span>');
+            text.push(
+              '<li><span class="legend-label" style="background-color:' +
+                chart.data.datasets[0].backgroundColor[i] +
+                '"></span>'
+            )
             if (chart.data.labels[i]) {
-              text.push(chart.data.labels[i]);
+              text.push(chart.data.labels[i])
             }
-            text.push('</li>');
+            text.push('</li>')
           }
-          text.push('</ul>');
-          return text.join("");
+          text.push('</ul>')
+          return text.join('')
         },
-        cutoutPercentage: 70     
-      };
-      var dailySalesChartCanvas = $("#daily-sales-chart").get(0).getContext("2d");
+        cutoutPercentage: 70
+      }
+      var dailySalesChartCanvas = $('#daily-sales-chart').get(0).getContext('2d')
       var dailySalesChart = new Chart(dailySalesChartCanvas, {
         type: 'doughnut',
         data: dailySalesChartData,
         options: dailySalesChartOptions
-      });
-      document.getElementById('daily-sales-chart-legend').innerHTML = dailySalesChart.generateLegend();
+      })
+      document.getElementById('daily-sales-chart-legend').innerHTML = dailySalesChart.generateLegend()
     }
-    if ($("#inline-datepicker-example").length) {
+    if ($('#inline-datepicker-example').length) {
       $('#inline-datepicker-example').datepicker({
         enableOnReadonly: true,
-        todayHighlight: true,
-      });
+        todayHighlight: true
+      })
     }
-  });
-})(jQuery);
+    // Fetch data for pending Withdrawals
+    fetchDataAndRender('server_endpoint', 'pendingWithdrawals')
+
+    // Fetch data for pending Claim
+    fetchDataAndRender('server_endpoint', 'pendingClaim')
+
+    // Fetch data for pending Deposit
+    fetchDataAndRender('server_endpoint', 'pendingDeposit')
+
+    // Reusable function to fetch data and render for a specific table
+    function fetchDataAndRender(endpoint, containerId) {
+      $.ajax({
+        url: endpoint,
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          renderData(data, containerId)
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error)
+        }
+      })
+    }
+
+    // Reusable function to render data in the specified format for a specific container
+    function renderData(data, containerId) {
+      var container = $('#' + containerId)
+
+      // Clear existing data in the container
+      container.empty()
+
+      // Iterate over each data object and append a new row
+      $.each(data, function (index, item) {
+        var row = $('<tr>')
+        row.append('<td class="font-weight-bold">' + item.name + '</td>')
+        row.append('<td class="text-muted">' + item.code + '</td>')
+        row.append('<td>' + item.quantity + '</td>')
+        row.append('<td><label class="badge badge-success badge-pill">' + item.status + '</label></td>')
+
+        // Append the row to the container
+        container.append(row)
+      })
+    }
+    function fetchShowValues() {
+      $.ajax({
+        url: 'http://localhost:8000/admin/dashboard',
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+          const data = res.data
+          console.log(data)
+          // Get each of the displayed elements using jQuery
+          $('#total-deposited-players').text(data.totalDepositedPlayers)
+          $('#total-deposited-players-type').text(
+            `${data.totalDepositedPlayers.percent} ${data.totalDepositedPlayers.type}`
+          )
+          $('#total-gross-gaming-revenue').text(data.grossGamingRevenue)
+          $('#total-gross-gaming-revenue-type').text(
+            `${data.grossGamingRevenue.percent} ${data.grossGamingRevenue.type}`
+          )
+          $('#total-player-balance').text(data.totalPlayerBalance)
+          $('#total-player-balance-type').text(`${data.totalPlayerBalance.percent} ${data.totalPlayerBalance.type}`)
+          $('#total-wagered-ranking').text(data.totalWagered)
+          $('#total-wagered-ranking-type').text(`${data.totalWagered.percent} ${data.totalWagered.type}`)
+          $('#total-win-ranking').text(data.totalWon)
+          $('#total-win-ranking-type').text(`${data.totalWon.percent} ${data.totalWon.type}`)
+          $('#total-lose-ranking').text(data.totalLoss)
+          $('#total-lose-ranking-type').text(`${data.totalLoss.percent} ${data.totalLoss.type}`)
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error)
+        }
+      })
+    }
+
+    // Trigger the fetchShowValues function on document ready
+    fetchShowValues()
+  })
+})(jQuery)
