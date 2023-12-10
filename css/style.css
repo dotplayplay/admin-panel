@@ -22586,9 +22586,13 @@ code {
   }
 }
 
+.card.card-statistics .statistics-item h2 {
+  font-size: 1.5rem;
+
+}
 @media (min-width: 768px) and (max-width: 991px) {
   .card.card-statistics .statistics-item h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .card.card-statistics .statistics-item:before {
     right: 10%;
@@ -29391,5 +29395,30 @@ div.tagsinput span.tag a {
   display: none;
 }
 
+.options-container {
+  position: relative;
+}
 
+.options {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+.options li {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 24px;
+}
 /*# sourceMappingURL=maps/style.css.map */

@@ -854,7 +854,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <!-- <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -866,6 +866,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -895,8 +896,41 @@
                   </div>
                 </div>
               </div>
+            </div> -->
+            <!-- registered user chart -->
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title">
+                    <i class="fas fa-chart-pie"></i>
+                    Registered User
+                  </h4>
+                  <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                    <canvas id="registered-users-chart" class="mt-3"></canvas>
+                    <div class="pt-4">
+                      <div id="registered-users-chart-legend" class="sales-status-chart-legend"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-md-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title">
+                    <i class="fas fa-chart-pie"></i>
+                    Wagered and Won
+                  </h4>
+                  <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                    <canvas id="wagered-won-chart" class="mt-3"></canvas>
+                    <div class="pt-4">
+                      <div id="wagered-won-chart-legend" class="sales-status-chart-legend"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -955,7 +989,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- <div class="row">
             <div class="col-12 grid-margin">
@@ -1191,7 +1225,7 @@
               </div>
             </div>
             </div> -->
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-8 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -1270,7 +1304,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- <div class="col-md-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -1477,6 +1511,348 @@
             </div>
           </div>
         </div> -->
+        <div style="margin-top: 20px;" class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Total Wagered Ranking</h4>
+              <div class="row">
+                <div class="col-xl-auto">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        User 
+                      </th>
+                      <th>
+                        User ID
+                      </th>
+                      <th>
+                        Full name
+                      </th>
+                      <th>
+                        Username
+                      </th>
+                      <th>
+                        Email
+                      </th>
+                      <th>
+                        phone
+                      </th>
+                      <th>
+                        Born
+                      </th>
+                      <th>
+                        Next Level Point
+                      </th>
+                      <th>
+                        Hide Profile
+                      </th>
+                      <th>
+                        Hidden From Public
+                      </th>
+                      <th>
+                        Refuse Friends Request
+                      </th>
+                      <th>
+                        Refuse Tips
+                      </th>
+                      <th>
+                        Vip Level
+                      </th>
+                      <th>
+                        kyc is Activated
+                      </th>
+                      <th>
+                        Total Wagered
+                      </th>
+                      <th>
+                        Invited Code
+                      </th>
+                      <th>
+                        Google auth
+                      </th>
+                      <th>
+                        Suspended
+                      </th>
+                      <th>
+                        Vip Progress
+                      </th>
+                      <th>
+                        FA is Activated
+                      </th>
+                      <th>
+                        Earn Me
+                      </th>
+                      <th>
+                        Commission Reward
+                      </th>
+                      <th>
+                        USD Reward
+                      </th>
+                      <th>
+                        Joined At
+                      </th>
+                      <th>
+                        Account type
+                      </th>
+                      <th>
+                        Total chat messages
+                      </th>
+                      <th>
+                        Weekly Wagered
+                      </th>
+                      <th>
+                        Monthly Wagered
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id = 'total-wagered-ranking-table'>
+                   
+                      
+                  </tbody>
+                </table>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Total Won Ranking</h4>
+              <div class="row">
+                <div class="col-xl-auto">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        User 
+                      </th>
+                      <th>
+                        User ID
+                      </th>
+                      <th>
+                        Full name
+                      </th>
+                      <th>
+                        Username
+                      </th>
+                      <th>
+                        Email
+                      </th>
+                      <th>
+                        phone
+                      </th>
+                      <th>
+                        Total Won
+                      </th>
+                      <th>
+                        Provider
+                      </th>
+                      <th>
+                        Email Verified
+                      </th>
+                      <th>
+                        Last Login Ip
+                      </th>
+                      <th>
+                        Next Level Point
+                      </th>
+                      <th>
+                        Hide Profile
+                      </th>
+                      <th>
+                        Hidden From Public
+                      </th>
+                      <th>
+                        Refuse Friends Request
+                      </th>
+                      <th>
+                        Refuse Tips
+                      </th>
+                      <th>
+                        Vip Level
+                      </th>
+                      <th>
+                        kyc is Activated
+                      </th>
+                      <th>
+                        Total Wagered
+                      </th>
+                      <th>
+                        Invited Code
+                      </th>
+                      <th>
+                        Google auth
+                      </th>
+                      <th>
+                        Suspended
+                      </th>
+                      <th>
+                        Vip Progress
+                      </th>
+                      <th>
+                        FA is Activated
+                      </th>
+                      <th>
+                        Earn Me
+                      </th>
+                      <th>
+                        Commission Reward
+                      </th>
+                      <th>
+                        USD Reward
+                      </th>
+                      <th>
+                        Joined At
+                      </th>
+                      <th>
+                        Account type
+                      </th>
+                      <th>
+                        Total chat messages
+                      </th>
+                      <th>
+                        Weekly Wagered
+                      </th>
+                      <th>
+                        Monthly Wagered
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id = 'total-won-ranking-table'>
+                   
+                      
+                  </tbody>
+                </table>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Total Loss Ranking</h4>
+              <div class="row">
+                <div class="col-xl-auto">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        User 
+                      </th>
+                      <th>
+                        User ID
+                      </th>
+                      <th>
+                        Full name
+                      </th>
+                      <th>
+                        Username
+                      </th>
+                      <th>
+                        Email
+                      </th>
+                      <th>
+                        phone
+                      </th>
+                      <th>
+                        Total Loss
+                      </th>
+                      <th>
+                        Provider
+                      </th>
+                      <th>
+                        Email Verified
+                      </th>
+                      <th>
+                        Last Login Ip
+                      </th>
+                      <th>
+                        Next Level Point
+                      </th>
+                      <th>
+                        Hide Profile
+                      </th>
+                      <th>
+                        Hidden From Public
+                      </th>
+                      <th>
+                        Refuse Friends Request
+                      </th>
+                      <th>
+                        Refuse Tips
+                      </th>
+                      <th>
+                        Vip Level
+                      </th>
+                      <th>
+                        kyc is Activated
+                      </th>
+                      <th>
+                        Total Wagered
+                      </th>
+                      <th>
+                        Invited Code
+                      </th>
+                      <th>
+                        Google auth
+                      </th>
+                      <th>
+                        Suspended
+                      </th>
+                      <th>
+                        Vip Progress
+                      </th>
+                      <th>
+                        FA is Activated
+                      </th>
+                      <th>
+                        Earn Me
+                      </th>
+                      <th>
+                        Commission Reward
+                      </th>
+                      <th>
+                        USD Reward
+                      </th>
+                      <th>
+                        Joined At
+                      </th>
+                      <th>
+                        Account type
+                      </th>
+                      <th>
+                        Total chat messages
+                      </th>
+                      <th>
+                        Weekly Wagered
+                      </th>
+                      <th>
+                        Monthly Wagered
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id = 'total-loss-ranking-table'>
+                   
+                      
+                  </tbody>
+                </table>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

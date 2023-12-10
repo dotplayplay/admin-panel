@@ -93,7 +93,7 @@
         row.append('<td>' + member.last_login_ip + '</td>')
         row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
         row.append(
-          '<td><button class="chat-button">Chat</button> <button class="edit-button">Edit</button> <button class="add-transaction-button">Add Transaction</button> <button class="status-button">Status</button></td>'
+          '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
         )
 
         // Append the row to the table body
@@ -101,6 +101,52 @@
       })
     }
 
+    // Toggle options on icon click
+    $('.icon').click(function () {
+      // Hide all other options
+      $('.options').not($(this).siblings('.options')).hide()
+      // Toggle options related to the clicked icon
+      $(this).siblings('.options').toggle()
+    })
+
+    // Hide options when clicking outside the container
+    $(document).on('click', function (event) {
+      if (!$(event.target).closest('.options-container').length) {
+        $('.options').hide()
+      }
+    })
+    reportTables('http://localhost:8000/admin/gamereport', '#game-report-table')
+    reportTables('http://localhost:8000/admin/report', '#daily-report-table')
+    function reportTables(url, id) {
+      $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+          console.log(res)
+
+          const tbody = $(id)
+
+          function appendDataToTable(data, prefix = '') {
+            $.each(data, function (key, value) {
+              if (typeof value === 'object' && value !== null) {
+                appendDataToTable(value, key + '_')
+              } else {
+                const row = $('<tr>')
+                row.append($('<td>').text(prefix + key))
+                row.append($('<td>').text(value))
+                tbody.append(row)
+              }
+            })
+          }
+
+          appendDataToTable(res)
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error)
+        }
+      })
+    }
     // jQuery event handler for signup button click
     // $('#signupForm').submit('click', function (e) {
     //   e.preventDefault()
