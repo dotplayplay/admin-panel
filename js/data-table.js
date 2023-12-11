@@ -1,6 +1,7 @@
 ;(function ($) {
   'use strict'
   $(function () {
+    console.log(serverUrl)
     $('#order-listing').DataTable({
       aLengthMenu: [
         [5, 10, 15, -1],
@@ -38,68 +39,64 @@
 
     // Fetch data from the server with the actual endpoint)
     $.ajax({
-      url: 'http://localhost:8000/admin/members',
+      url: serverUrl + '/admin/members',
       method: 'GET',
       dataType: 'json',
       success: function (res) {
+        const newData = res.data
         console.log(res.data)
-        renderMemberTable(res.data)
+        var tableBody = $('#member-table-body')
+        tableBody.empty()
+        // Clear existing data in the table
+
+        // Iterate over each member data and append a new row
+        $.each(newData, function (index, member) {
+          let row = $('<tr>')
+          row.append(
+            '<td><a href="' +
+              serverUrl +
+              '/admin/member/' +
+              member.user_id +
+              '" target="_blank">' +
+              member.user_id +
+              '</a></td>'
+          )
+          row.append('<td>' + member.profile?.username + '</td>')
+          row.append('<td>' + member.profile?.invited_code + '</td>')
+          row.append('<td>' + member.profile?.lastname + ' ' + member.profile?.firstname + '</td>')
+          row.append('<td>' + member.profile?.phone + '</td>')
+          row.append('<td>' + member.email + '</td>')
+          row.append('<td>' + member.profile?.total_wagered + '</td>')
+          row.append('<td>' + member.ggr + '</td>')
+          row.append('<td>' + member.profile?.total_chat_messages + '</td>')
+          row.append('<td>' + member.totalBalance + '</td>')
+          row.append('<td>' + member.bankInfo + '</td>')
+          row.append(
+            '<td>' +
+              new Date(member.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
+              '</td>'
+          )
+          row.append('<td>' + member.userFirstAndLastDeposit.first_deposit + '</td>')
+          row.append('<td>' + member.userFirstAndLastDeposit.last_deposit + '</td>')
+          row.append(
+            '<td>' +
+              new Date(member.lastLoginAt).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
+              '</td>'
+          )
+          row.append('<td>' + member.last_login_ip + '</td>')
+          row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
+          row.append(
+            '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
+          )
+
+          // Append the row to the table body
+          tableBody.append(row)
+        })
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
       }
     })
-
-    // Function to render data in the member table
-    function renderMemberTable(data) {
-      var tableBody = $('#member-table-body')
-
-      // Clear existing data in the table
-      tableBody.empty()
-
-      // Iterate over each member data and append a new row
-      $.each(data, function (index, member) {
-        var row = $('<tr>')
-        row.append(
-          '<td><a href="' +
-            'http://localhost:8000/admin/member/' +
-            member.user_id +
-            '" target="_blank">' +
-            member.user_id +
-            '</a></td>'
-        )
-        row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.total_wagered + '</td>')
-        row.append('<td>' + member.ggr + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.totalBalance + '</td>')
-        row.append('<td>' + member.bankInfo + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.userFirstAndLastDeposit.first_deposit + '</td>')
-        row.append('<td>' + member.userFirstAndLastDeposit.last_deposit + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.lastLoginAt).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
-        row.append(
-          '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
-        )
-
-        // Append the row to the table body
-        tableBody.append(row)
-      })
-    }
 
     // Toggle options on icon click
     $('.icon').click(function () {
@@ -115,8 +112,8 @@
         $('.options').hide()
       }
     })
-    reportTables('http://localhost:8000/admin/gamereport', '#game-report-table')
-    reportTables('http://localhost:8000/admin/report', '#daily-report-table')
+    reportTables(serverUrl + '/admin/gamereport', '#game-report-table')
+    reportTables(serverUrl + '/admin/report', '#daily-report-table')
     function reportTables(url, id) {
       $.ajax({
         url: url,
@@ -186,7 +183,7 @@
 
     //       // Send complete data to the second server
     //       $.ajax({
-    //         url: 'http://localhost:8000/admin/create', // Replace with your actual second server endpoint
+    //         url: serverUrl+'/admin/create', // Replace with your actual second server endpoint
     //         method: 'POST',
     //         data: formData,
     //         success: function (secondServerResponse) {

@@ -1,6 +1,7 @@
 ;(function ($) {
   'use strict'
   $(function () {
+    console.log(serverUrl)
     if ($('#orders-chart').length) {
       var currentChartCanvas = $('#orders-chart').get(0).getContext('2d')
       var currentChart = new Chart(currentChartCanvas, {
@@ -198,7 +199,7 @@
     }
     if ($('#registered-users-chart').length) {
       $.ajax({
-        url: 'http://localhost:8000/admin/userstats',
+        url: serverUrl + '/admin/userstats',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -270,7 +271,7 @@
     }
     if ($('#wagered-won-chart').length) {
       $.ajax({
-        url: 'http://localhost:8000/admin/wageredwonstats',
+        url: serverUrl + '/admin/wageredwonstats',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -439,7 +440,7 @@
     }
     function fetchShowValues() {
       $.ajax({
-        url: 'http://localhost:8000/admin/dashboard',
+        url: serverUrl + '/admin/dashboard',
         method: 'GET',
         dataType: 'json',
         success: function (res) {
@@ -473,7 +474,7 @@
     fetchShowValues()
 
     $.ajax({
-      url: 'http://localhost:8000/admin/wageredranking',
+      url: serverUrl + '/admin/wageredranking',
       method: 'GET',
       dataType: 'json',
       success: function (res) {
@@ -497,43 +498,16 @@
         var row = $('<tr>')
         row.append('<td class="py-1"><img src=' + member.profile_image + 'alt="image" /></td>')
         row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.lastname + ' ' + member.firstname + '</td>')
         row.append('<td>' + member.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.phone + '</td>')
-        row.append('<td>' + member.born + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.hide_profile + '</td>')
-        row.append('<td>' + member.hidden_from_public + '</td>')
-        row.append('<td>' + member.refuse_friends_request + '</td>')
-        row.append('<td>' + member.refuse_tips + '</td>')
         row.append('<td>' + member.vip_level + '</td>')
-        row.append('<td>' + member.kyc_is_activated + '</td>')
         row.append('<td>' + member.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.invited_code + '</td>')
-        row.append('<td>' + member.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.is_suspend + '</td>')
-        row.append('<td>' + member.vip_progress + '</td>')
-        row.append('<td>' + member.fa_is_activated + '</td>')
-        row.append('<td>' + member.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.usd_reward.toFixed(2) + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.joined_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.account_type + '</td>')
-        row.append('<td>' + member.total_chat_messages + '</td>')
-        row.append('<td>' + member.weekly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
 
         // Append the row to the table body
         tableBody.append(row)
       })
     }
     $.ajax({
-      url: 'http://localhost:8000/admin/wonranking',
+      url: serverUrl + '/admin/wonranking',
       method: 'GET',
       dataType: 'json',
       success: function (res) {
@@ -557,51 +531,17 @@
         var row = $('<tr>')
         row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
         row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
         row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.profile.totalWon + '</td>')
-        row.append('<td>' + member.provider + '</td>')
-        row.append('<td>' + member.emailVerified + '</td>')
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.profile.hide_profile + '</td>')
-        row.append('<td>' + member.profile.hidden_from_public + '</td>')
-        row.append('<td>' + member.profile.refuse_friends_request + '</td>')
-        row.append('<td>' + member.profile.refuse_tips + '</td>')
+        row.append('<td>' + member.totalWon.toFixed(2) + '</td>')
         row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.kyc_is_activated + '</td>')
         row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.profile.is_suspend + '</td>')
-        row.append('<td>' + member.profile.vip_progress + '</td>')
-        row.append('<td>' + member.profile.fa_is_activated + '</td>')
-        row.append('<td>' + member.profile.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.usd_reward.toFixed(2) + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.profile.joined_at).toLocaleString('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            }) +
-            '</td>'
-        )
-        row.append('<td>' + member.profile.account_type + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.profile.weekly_wagered + '</td>')
-        row.append('<td>' + member.profile.monthly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
 
         // Append the row to the table body
         tableBody.append(row)
       })
     }
     $.ajax({
-      url: 'http://localhost:8000/admin/lossranking',
+      url: serverUrl + '/admin/lossranking',
       method: 'GET',
       dataType: 'json',
       success: function (res) {
@@ -625,44 +565,10 @@
         var row = $('<tr>')
         row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
         row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
         row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.profile.totalLoss + '</td>')
-        row.append('<td>' + member.provider + '</td>')
-        row.append('<td>' + member.emailVerified + '</td>')
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.profile.hide_profile + '</td>')
-        row.append('<td>' + member.profile.hidden_from_public + '</td>')
-        row.append('<td>' + member.profile.refuse_friends_request + '</td>')
-        row.append('<td>' + member.profile.refuse_tips + '</td>')
+        row.append('<td>' + member.totalLoss.toFixed(2) + '</td>')
         row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.kyc_is_activated + '</td>')
         row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.profile.is_suspend + '</td>')
-        row.append('<td>' + member.profile.vip_progress + '</td>')
-        row.append('<td>' + member.profile.fa_is_activated + '</td>')
-        row.append('<td>' + member.profile.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.usd_reward.toFixed(2) + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.profile.joined_at).toLocaleString('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            }) +
-            '</td>'
-        )
-        row.append('<td>' + member.profile.account_type + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.profile.weekly_wagered + '</td>')
-        row.append('<td>' + member.profile.monthly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
 
         // Append the row to the table body
         tableBody.append(row)
