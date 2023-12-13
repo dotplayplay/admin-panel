@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
+    <title>Dot Play Play </title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../vendors/iconfonts/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
@@ -1092,6 +1092,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="member-table-body">
+                                                <p id="loading-member-table">loading</p>
                                                 <!-- Data will be appended here -->
                                             </tbody>
                                         </table>
@@ -1154,6 +1155,7 @@
 
         // Initialize Firebase Authentication
         const auth = getAuth(app);
+        console.log(auth)
 
         // JavaScript event handler for signup button click
         const form = document.getElementById('signupForm')
@@ -1164,6 +1166,7 @@
             const username = document.getElementById('username').value;
             const phoneNumber = document.getElementById('phoneNumber').value;
             const comfirmPassword = document.getElementById('comfirmPassword').value;
+            const  message = document.getElementById('message')
            
             const data= {
                 email,password,username,phoneNumber, comfirmPassword
@@ -1195,12 +1198,15 @@
                             console.error('Error sending data to the second server:', error);
                             // Handle errors or display error messages
                         });
+                        message.innerText='user created successfully'
                 })
                 .catch(error => {
                     // Handle errors
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.error('Error signing up:', errorCode, errorMessage);
+                    message.innerText='An error occured in creating user kindly try again'
+                    message.style.color='red'
                 });
         };
     </script>

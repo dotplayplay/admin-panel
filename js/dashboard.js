@@ -204,6 +204,10 @@
         dataType: 'json',
         success: function (data) {
           console.log(data)
+          if (data) {
+            const loading = document.getElementById('loading-user')
+            loading.innerText = ''
+          }
           const months = data.registeredUser.map(item => item.month)
 
           const backgroundColor = data.registeredUser.map(item => item.backgroundColor)
@@ -266,6 +270,11 @@
         },
         error: function (xhr, status, error) {
           console.error('Error fetching data:', error)
+          if (error) {
+            const loading = document.getElementById('loading-user')
+            loading.innerText = 'An error ocurred try refreshing'
+            loading.style.color = 'red'
+          }
         }
       })
     }
@@ -275,6 +284,10 @@
         method: 'GET',
         dataType: 'json',
         success: function (data) {
+          if (data) {
+            const loading = document.getElementById('loading-wager')
+            loading.innerText = ''
+          }
           const months = data.totalWagered.map(item => item.month)
           const backgroundColor = data.totalWagered.map(item => item.backgroundColor)
           const borderColor = data.totalWagered.map(item => item.borderColor)
@@ -336,6 +349,11 @@
         },
         error: function (xhr, status, error) {
           console.error('Error fetching data:', error)
+          if (error) {
+            const loading = document.getElementById('loading-wager')
+            loading.innerText = 'An error ocurred try refreshing'
+            loading.style.color = 'red'
+          }
         }
       })
     }
@@ -445,6 +463,10 @@
         dataType: 'json',
         success: function (res) {
           const data = res.data
+          if (data) {
+            const loading = document.getElementById('loading')
+            loading.innerText = ''
+          }
           console.log(data)
           // Get each of the displayed elements using jQuery
           $('#total-deposited-players').text(data.totalDepositedPlayers)
@@ -466,6 +488,11 @@
         },
         error: function (xhr, status, error) {
           console.error('Error fetching data:', error)
+          if (error) {
+            const loading = document.getElementById('loading')
+            loading.innerText = 'unable to load data'
+            loading.style.color = 'red'
+          }
         }
       })
     }
@@ -479,10 +506,19 @@
       dataType: 'json',
       success: function (res) {
         console.log(res)
+        if (res) {
+          const loading = document.getElementById('loading-wager-table')
+          loading.innerText = ''
+        }
         renderWageredRanking(res)
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
+        if (error) {
+          const loading = document.getElementById('loading-wager-table')
+          loading.innerText = 'an error ocured'
+          loading.style.color = 'red'
+        }
       }
     })
 
@@ -512,10 +548,19 @@
       dataType: 'json',
       success: function (res) {
         console.log(res)
+        if (res) {
+          const loading = document.getElementById('loading-won-table')
+          loading.innerText = ''
+        }
         renderWonRanking(res.wonRanking)
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
+        if (error) {
+          const loading = document.getElementById('loading-won-table')
+          loading.innerText = 'an error occured'
+          loading.style.color = 'red'
+        }
       }
     })
 
@@ -546,10 +591,19 @@
       dataType: 'json',
       success: function (res) {
         console.log(res)
+        if (res) {
+          const loading = document.getElementById('loading-loss-table')
+          loading.innerText = ''
+        }
         renderLossRanking(res.lossRanking)
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
+        if (error) {
+          const loading = document.getElementById('loading-loss-table')
+          loading.innerText = ' an error ocurred'
+          loading.style.color = 'red'
+        }
       }
     })
 

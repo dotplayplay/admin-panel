@@ -43,6 +43,10 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
+        if (res) {
+          const loading = document.getElementById('loading-member-table')
+          loading.innerText = ''
+        }
         const newData = res.data
         console.log(res.data)
         var tableBody = $('#member-table-body')
@@ -95,6 +99,11 @@
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
+        if (error) {
+          const loading = document.getElementById('loading-wager-table')
+          loading.innerText = 'an error ocured'
+          loading.style.color = 'red'
+        }
       }
     })
 
