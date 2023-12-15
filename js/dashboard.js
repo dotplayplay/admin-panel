@@ -2,6 +2,35 @@
   'use strict'
   $(function () {
     console.log(serverUrl)
+    const backgroundColors = {
+      January: '#3498db',
+      Febuary: '#e74c3c',
+      March: '#2ecc71',
+      April: '#f39c12',
+      May: '#1abc9c',
+      June: '#9b59b6',
+      July: '#e67e22',
+      August: '#2c3e50',
+      September: '#27ae60',
+      October: '#c0392b',
+      November: '#7f8c8d',
+      December: '#d35400'
+    }
+
+    const borderColors = {
+      January: '#2980b9',
+      Febuary: '#c0392b',
+      March: '#27ae60',
+      April: '#d68910',
+      May: '#16a085',
+      June: '#8e44ad',
+      July: '#d35400',
+      August: '#1f2c39',
+      September: '#229954',
+      October: '#a93226',
+      November: '#626567',
+      December: '#ba4e00'
+    }
     if ($('#orders-chart').length) {
       var currentChartCanvas = $('#orders-chart').get(0).getContext('2d')
       var currentChart = new Chart(currentChartCanvas, {
@@ -210,8 +239,8 @@
           }
           const months = data.registeredUser.map(item => item.month)
 
-          const backgroundColor = data.registeredUser.map(item => item.backgroundColor)
-          const borderColor = data.registeredUser.map(item => item.borderColor)
+          const backgroundColor = data.registeredUser.map(item => backgroundColors[item.month])
+          const borderColor = data.registeredUser.map(item => borderColors[item.month])
 
           const totalUsers = data.registeredUser.reduce((sum, monthData) => sum + monthData.noOfRegisteredUsers, 0)
           const percentages = data.registeredUser.map(monthData =>
@@ -284,13 +313,17 @@
         method: 'GET',
         dataType: 'json',
         success: function (data) {
+          console.log(data)
           if (data) {
             const loading = document.getElementById('loading-wager')
             loading.innerText = ''
+            if (data.totalWagered.length < 1) {
+              loading.innerText = 'No current data to be displayed'
+            }
           }
           const months = data.totalWagered.map(item => item.month)
-          const backgroundColor = data.totalWagered.map(item => item.backgroundColor)
-          const borderColor = data.totalWagered.map(item => item.borderColor)
+          const backgroundColor = data.totalWagered.map(item => backgroundColors[item.month])
+          const borderColor = data.totalWagered.map(item => borderColors[item.month])
 
           const totalUsers = data.totalWagered.reduce((sum, monthData) => sum + monthData.totalAmount, 0)
           const percentages = data.totalWagered.map(monthData =>
@@ -464,8 +497,11 @@
         success: function (res) {
           const data = res.data
           if (data) {
-            const loading = document.getElementById('loading')
-            loading.innerText = ''
+            const loadings = document.querySelectorAll('#loading')
+
+            loadings.forEach(function (element) {
+              element.textContent = ''
+            })
           }
           console.log(data)
           // Get each of the displayed elements using jQuery
@@ -488,11 +524,9 @@
         },
         error: function (xhr, status, error) {
           console.error('Error fetching data:', error)
-          if (error) {
-            const loading = document.getElementById('loading')
-            loading.innerText = 'unable to load data'
-            loading.style.color = 'red'
-          }
+          const loading = document.getElementById('loading')
+          loading.innerText = 'unable to load data'
+          loading.style.color = 'red'
         }
       })
     }
@@ -508,7 +542,7 @@
         console.log(res)
         if (res) {
           const loading = document.getElementById('loading-wager-table')
-          loading.innerText = ''
+          loading.innerText = res.length < 1 ? 'No current Wager Ranking' : ''
         }
         renderWageredRanking(res)
       },
@@ -550,7 +584,7 @@
         console.log(res)
         if (res) {
           const loading = document.getElementById('loading-won-table')
-          loading.innerText = ''
+          loading.innerText = res.wonRanking.length < 1 ? 'No current won Ranking' : ''
         }
         renderWonRanking(res.wonRanking)
       },
@@ -574,12 +608,12 @@
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
         var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
+        row.append('<td class="py-1"><img src=' + member.profile?.profile_image + 'alt="image" /></td>')
         row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.username + '</td>')
+        row.append('<td>' + member.profile?.username + '</td>')
         row.append('<td>' + member.totalWon.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
+        row.append('<td>' + member.profile?.vip_level + '</td>')
+        row.append('<td>' + member.profile?.total_wagered.toFixed(2) + '</td>')
 
         // Append the row to the table body
         tableBody.append(row)
@@ -593,7 +627,7 @@
         console.log(res)
         if (res) {
           const loading = document.getElementById('loading-loss-table')
-          loading.innerText = ''
+          loading.innerText = res.lossRanking.length < 1 ? 'No current loss Ranking' : ''
         }
         renderLossRanking(res.lossRanking)
       },
@@ -617,12 +651,12 @@
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
         var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
+        row.append('<td class="py-1"><img src=' + member.profile?.profile_image + 'alt="image" /></td>')
         row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.username + '</td>')
+        row.append('<td>' + member.profile?.username + '</td>')
         row.append('<td>' + member.totalLoss.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
+        row.append('<td>' + member.profile?.vip_level + '</td>')
+        row.append('<td>' + member.profile?.total_wagered.toFixed(2) + '</td>')
 
         // Append the row to the table body
         tableBody.append(row)

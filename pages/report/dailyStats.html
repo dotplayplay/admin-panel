@@ -19,7 +19,8 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="../../css/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <link rel="shortcut icon"
+        href="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png" />
     <!-- Include the Firebase SDK -->
     <script type="module" src='https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js'></script>
     <script type="module" src='https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js'></script>
@@ -847,36 +848,47 @@
                             </ol>
                         </nav>
                     </div>
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                            <h4 class="card-title">Daily Report</h4>
-                            <div class="row">
-                                <div class="" style="width: 100%;">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Field
-                                                    </th>
-                                                    <th>
-                                                        Value
-                                                    </th>
-                                                  
-                                                </tr>
-                                            </thead>
-                                            <tbody id='daily-report-table'>
-                
-                
-                                            </tbody>
-                                        </table>
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Daily Report</h4>
+                                <div class="row">
+                                    <div class="" style="width: 100%;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            User Id
+                                                        </th>
+                                                        <th>
+                                                            Username
+                                                        </th>
+                                                        <th>
+                                                            Total Wagered
+                                                        </th>
+                                                        <th>
+                                                            Total Payout
+                                                        </th>
+                                                        <th>
+                                                            GGR
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id='daily-report-table'>
+                                                    <!-- <p id="loading-daily">loading</p> -->
+
+                                                </tbody>
+                                            </table>
+                                            <p id="loading-daily" style="text-align: center;margin-top: 20px;">loading
+                                            </p>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- content-wrapper ends -->
                     <!-- partial:../partials/_footer.html -->
                     <footer class="footer">
@@ -905,7 +917,7 @@
         <script src="../../js/misc.js"></script>
         <script src="../../js/settings.js"></script>
         <script src="../../js/todolist.js"></script>
-            <script src="../../js/config.js"></script>
+        <script src="../../js/config.js"></script>
 
         <!-- endinject -->
         <!-- Custom js for this page-->

@@ -43,11 +43,11 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        if (res) {
-          const loading = document.getElementById('loading-member-table')
-          loading.innerText = ''
-        }
         const newData = res.data
+        if (newData) {
+          const loading = document.getElementById('loading-member-table')
+          loading.innerText = newData < 1 ? 'No current loss Ranking' : ''
+        }
         console.log(res.data)
         var tableBody = $('#member-table-body')
         tableBody.empty()
@@ -99,11 +99,10 @@
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
-        if (error) {
-          const loading = document.getElementById('loading-wager-table')
-          loading.innerText = 'an error ocured'
-          loading.style.color = 'red'
-        }
+        const loading = document.getElementById('loading-member-table')
+        console.log('load gotten')
+        loading.innerText = 'an error ocured'
+        loading.style.color = 'red'
       }
     })
 
@@ -130,121 +129,76 @@
         dataType: 'json',
         success: function (res) {
           console.log(res)
-
-          const tbody = $(id)
-
-          function appendDataToTable(data, prefix = '') {
-            $.each(data, function (key, value) {
-              if (typeof value === 'object' && value !== null) {
-                appendDataToTable(value, key + '_')
-              } else {
-                const row = $('<tr>')
-                row.append($('<td>').text(prefix + key))
-                row.append($('<td>').text(value))
-                tbody.append(row)
-              }
-            })
+          if (res.data) {
+            const loading = document.getElementById('loading-daily')
+            loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
           }
+          var tableBody = $(id)
 
-          appendDataToTable(res)
+          // Clear existing data in the table
+          tableBody.empty()
+
+          // Iterate over each member data and append a new row
+          $.each(res.data, function (index, member) {
+            var row = $('<tr>')
+            row.append('<td>' + member.user_id + '</td>')
+            row.append('<td>' + member.username + '</td>')
+            row.append('<td>' + member.totalWagered.toFixed(2) + '</td>')
+            row.append('<td>' + member.totalPayout.toFixed(2) + '</td>')
+            row.append('<td>' + member.ggr.toFixed(2) + '</td>')
+
+            // Append the row to the table body
+            tableBody.append(row)
+          })
         },
+
         error: function (xhr, status, error) {
           console.error('Error fetching data:', error)
+          const loading = document.getElementById('loading-daily')
+          loading.innerText = ' an error ocurred'
+          loading.style.color = 'red'
         }
       })
     }
-    // jQuery event handler for signup button click
-    // $('#signupForm').submit('click', function (e) {
-    //   e.preventDefault()
-    //   //  Firebase configuration
-    //   const firebaseConfig = {
-    //     apiKey: 'AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ',
-    //     authDomain: 'dotplayplay-1692584380329.firebaseapp.com',
-    //     projectId: 'dotplayplay-1692584380329',
-    //     storageBucket: 'dotplayplay-1692584380329.appspot.com',
-    //     messagingSenderId: '934101502841',
-    //     appId: '1:934101502841:web:7c618c3beffda794a3bda8'
-    //   }
+    $.ajax({
+      url: serverUrl + '/admin/ggrreport',
+      method: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        if (res.data) {
+          const loading = document.getElementById('loading-ggr')
+          loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
+        }
+        renderGgrRanking(res.data)
+      },
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error)
+        const loading = document.getElementById('loading-ggr')
+        loading.innerText = ' an error ocurred'
+        loading.style.color = 'red'
+      }
+    })
 
-    //   // Initialize Firebase
-    //   const app = firebase.initializeApp(firebaseConfig)
+    // Function to render data in the member table
+    function renderGgrRanking(data) {
+      var tableBody = $('#ggr-report-table')
 
-    //   // Initialize Firebase Authentication
-    //   const auth = firebase.auth(app)
+      // Clear existing data in the table
+      tableBody.empty()
 
-    //   const email = $('#email').val()
-    //   const password = $('#password').val()
+      // Iterate over each member data and append a new row
+      $.each(data, function (index, member) {
+        var row = $('<tr>')
+        row.append('<td>' + member.user_id + '</td>')
+        row.append('<td>' + member.username + '</td>')
+        row.append('<td>' + member.totalWagered.toFixed(2) + '</td>')
+        row.append('<td>' + member.totalPayout.toFixed(2) + '</td>')
+        row.append('<td>' + member.ggr.toFixed(2) + '</td>')
 
-    //   // Create user with email and password using Firebase
-    //   auth
-    //     .createUserWithEmailAndPassword(email, password)
-    //     .then(userCredential => {
-    //       // User signed up successfully
-    //       const userId = userCredential.user.uid
-    //       console.log('User signed up. UserID:', userId)
-
-    //       // Add user ID to the form data
-    //       $('#signupForm').append('<input type="hidden" name="user_id" value="' + userId + '">')
-
-    //       // Collect all form data
-    //       var formData = $('#signupForm').serialize()
-    //       console.log(formData)
-
-    //       // Send complete data to the second server
-    //       $.ajax({
-    //         url: serverUrl+'/admin/create', // Replace with your actual second server endpoint
-    //         method: 'POST',
-    //         data: formData,
-    //         success: function (secondServerResponse) {
-    //           console.log('User created successfully:', secondServerResponse)
-    //           // Add any additional logic or UI updates here
-    //         },
-    //         error: function (xhr, status, error) {
-    //           console.error('Error sending data to the second server:', error)
-    //           // Handle errors or display error messages
-    //         }
-    //       })
-    //     })
-    //     .catch(error => {
-    //       // Handle errors
-    //       const errorCode = error.code
-    //       const errorMessage = error.message
-    //       console.error('Error signing up:', errorCode, errorMessage)
-    //     })
-    // })
+        // Append the row to the table body
+        tableBody.append(row)
+      })
+    }
   })
 })(jQuery)
-
-// import { initializeApp } from 'firebase/app'
-// import { getAuth } from 'firebase/auth'
-
-// // TODO: Replace the following with your app's Firebase project configuration
-// // See: https://firebase.google.com/docs/web/learn-more#config-object
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ',
-//   authDomain: 'dotplayplay-1692584380329.firebaseapp.com',
-//   projectId: 'dotplayplay-1692584380329',
-//   storageBucket: 'dotplayplay-1692584380329.appspot.com',
-//   messagingSenderId: '934101502841',
-//   appId: '1:934101502841:web:7c618c3beffda794a3bda8'
-// }
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig)
-
-// // Initialize Firebase Authentication and get a reference to the service
-// const auth = getAuth(app)
-
-// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
-// createUserWithEmailAndPassword(auth, email, password)
-//   .then(userCredential => {
-//     // Signed up
-//     const userId = userCredential.user.uid
-//     // ...
-//   })
-//   .catch(error => {
-//     const errorCode = error.code
-//     const errorMessage = error.message
-//     // ..
-//   })

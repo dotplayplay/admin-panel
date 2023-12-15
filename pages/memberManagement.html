@@ -31,13 +31,14 @@
     <div class="container-scroller">
         <!-- partial:../partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.html"><img
-                    src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1701944605/dpp-favicon-logo-allwhite-transparent-final_jsl2ko.png"
-                    alt="logo" /></a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img
-                    src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png" alt="logo" /></a>
-        </div>
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="index.html"><img
+                        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1701944605/dpp-favicon-logo-allwhite-transparent-final_jsl2ko.png"
+                        alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img
+                        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png"
+                        alt="logo" /></a>
+            </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="fas fa-bars"></span>
@@ -446,9 +447,9 @@
                             <span class="menu-title">Widgets</span>
                         </a>
                     </li>-->
-                    
-                   
-                   <!-- <li class="nav-item d-none d-lg-block">
+
+
+                    <!-- <li class="nav-item d-none d-lg-block">
                         <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false"
                             aria-controls="sidebar-layouts">
                             <i class="fas fa-columns menu-icon"></i>
@@ -763,7 +764,8 @@
                             <i class="far fa-file-alt menu-icon"></i>
                             <span class="menu-title">Member Management</span>
                         </a>
-                    </li></li>
+                    </li>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../pages/chatManagement/index.html">
                             <i class="far fa-file-alt menu-icon"></i>
@@ -771,26 +773,32 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+                        <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
+                            aria-controls="page-layouts">
                             <i class="fab fa-trello menu-icon"></i>
                             <span class="menu-title">Report</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="page-layouts">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../pages/report/dailyStats.html">Daily
+                                <li class="nav-item d-none d-lg-block"> <a class="nav-link"
+                                        href="../pages/report/dailyStats.html">Daily
                                         statistic report</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="../pages/report/gamereport.html">Game report</a></li>
-                                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../pages/report/GGRMember.html">GGR report
+                                <li class="nav-item"> <a class="nav-link" href="../pages/report/gamereport.html">Game
+                                        report</a></li>
+                                <li class="nav-item d-none d-lg-block"> <a class="nav-link"
+                                        href="../pages/report/GGRMember.html">GGR report
                                         by member</a></li>
-                                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../pages/report/memberBalance.html">Promotion
+                                <li class="nav-item d-none d-lg-block"> <a class="nav-link"
+                                        href="../pages/report/memberBalance.html">Promotion
                                         Report</a></li>
-                                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../pages/report/promotionReport.html">Member
+                                <li class="nav-item d-none d-lg-block"> <a class="nav-link"
+                                        href="../pages/report/promotionReport.html">Member
                                         Balance report</a></li>
                             </ul>
                         </div>
                     </li>
-                
+
                     <li class="nav-item">
                         <a class="nav-link" href="../pages/memberManagement.html">
                             <i class="far fa-file-alt menu-icon"></i>
@@ -824,64 +832,74 @@
                 </ul>
             </nav>
             <!-- partial -->
-            
+
             <div class="main-panel">
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <div class="row" style="max-width: 500px;">
                             <div class="col-lg-12">
                                 <div class="card">
-                                    <div class="card-body" >
+                                    <div class="card-body">
                                         <div style="margin-left: 90%;">
 
-                                            <span id="closeModalBtn" style="cursor: pointer; position: fixed;font-size: 30px;"><i class="fa fa-times"></i></span>
+                                            <span id="closeModalBtn"
+                                                style="cursor: pointer; position: fixed;font-size: 30px;"><i
+                                                    class="fa fa-times"></i></span>
                                         </div>
-                                    <!-- return success message or data -->
-                                    <p id="message"></p>
-                                    <h4 class="card-title">Create new member</h4>
-                                    <form class="cmxform" id="signupForm" method="post" action="#">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label for="username">Username</label>
-                                                <input id="username" class="form-control" name="username" type="text" required>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label for="phoneNumber">Phone Number</label>
-                                                <input id="phoneNumber" class="form-control" name="phoneNumber" type="text" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="firstname">Referral Code </label>
-                                                <input id="referal" class="form-control" name="referral" type="text">
-                                            </div>
-                                           
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" class="form-control" name="email" type="email" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password">Password</label>
-                                                <input id="password" class="form-control" name="password" type="password" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="comfirmPassword">Confirm password</label>
-                                                <input id="comfirmPassword" class="form-control" name="comfirmPassword" type="password">
-                                            </div>
-                                            <input class="btn btn-primary" type="submit" id="create-user" value="Submit">
-                                        </fieldset>
-                                    </form>
+                                        <!-- return success message or data -->
+                                        <p id="message"></p>
+                                        <h4 class="card-title">Create new member</h4>
+                                        <form class="cmxform" id="signupForm" method="post" action="#">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label for="username">Username</label>
+                                                    <input id="username" class="form-control" name="username"
+                                                        type="text" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="phoneNumber">Phone Number</label>
+                                                    <input id="phoneNumber" class="form-control" name="phoneNumber"
+                                                        type="text" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstname">Referral Code </label>
+                                                    <input id="referal" class="form-control" name="referral"
+                                                        type="text">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input id="email" class="form-control" name="email" type="email"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password">Password</label>
+                                                    <input id="password" class="form-control" name="password"
+                                                        type="password" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="comfirmPassword">Confirm password</label>
+                                                    <input id="comfirmPassword" class="form-control"
+                                                        name="comfirmPassword" type="password">
+                                                </div>
+                                                <input class="btn btn-primary" type="submit" id="create-user"
+                                                    value="Submit">
+                                            </fieldset>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 <div class="content-wrapper">
                     <div class="page-header">
                         <h3 class="page-title">
-                           Member List
+                            Member List
                         </h3>
-                        <button id="openModalBtn" type="button" class="btn btn-primary btn-icon-text"  data-toggle="tooltip" data-placement="right" title="Create new user">
+                        <button id="openModalBtn" type="button" class="btn btn-primary btn-icon-text"
+                            data-toggle="tooltip" data-placement="right" title="Create new user">
                             <i class="fa fa-upload btn-icon-prepend"></i>
                             Add new Member
                         </button>
@@ -1060,7 +1078,7 @@
                             </div>
                         </div>
                     </div> -->
-                    
+
 
                     <div class="card">
                         <div class="card-body">
@@ -1092,17 +1110,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="member-table-body">
-                                                <p id="loading-member-table">loading</p>
+                                                <!-- <p id="loading-member-table">loading</p> -->
                                                 <!-- Data will be appended here -->
                                             </tbody>
                                         </table>
+                                        <p id="loading-member-table" style="margin-top: 20px;">loading</p>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
                 <!-- content-wrapper ends -->
                 <!-- partial:../partials/_footer.html -->
                 <footer class="footer">
@@ -1137,18 +1157,18 @@
     <!-- End custom js for this page-->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword  } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        
-    
+        import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+
         // Firebase configuration
         const firebaseConfig = {
-                apiKey: "AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ",
-                authDomain: "dotplayplay-1692584380329.firebaseapp.com",
-                projectId: "dotplayplay-1692584380329",
-                storageBucket: "dotplayplay-1692584380329.appspot.com",
-                messagingSenderId: "934101502841",
-                appId: "1:934101502841:web:7c618c3beffda794a3bda8"
-            };
+            apiKey: "AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ",
+            authDomain: "dotplayplay-1692584380329.firebaseapp.com",
+            projectId: "dotplayplay-1692584380329",
+            storageBucket: "dotplayplay-1692584380329.appspot.com",
+            messagingSenderId: "934101502841",
+            appId: "1:934101502841:web:7c618c3beffda794a3bda8"
+        };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -1159,29 +1179,29 @@
 
         // JavaScript event handler for signup button click
         const form = document.getElementById('signupForm')
-        form.onsubmit= async function (e) {
+        form.onsubmit = async function (e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const username = document.getElementById('username').value;
             const phoneNumber = document.getElementById('phoneNumber').value;
             const comfirmPassword = document.getElementById('comfirmPassword').value;
-            const  message = document.getElementById('message')
-           
-            const data= {
-                email,password,username,phoneNumber, comfirmPassword
+            const message = document.getElementById('message')
+
+            const data = {
+                email, password, username, phoneNumber, comfirmPassword
             }
             console.log(data)
             // Create user with email and password using Firebase
-           await createUserWithEmailAndPassword(email, password)
+            await createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     // User signed up successfully
                     const user_id = userCredential.user.uid;
                     console.log('User signed up. UserID:', user_id);
 
-                   
+
                     // Collect all form data
-                    const formData = {...data, user_id }
+                    const formData = { ...data, user_id }
                     console.log(formData);
 
                     // Send complete data to the second server
@@ -1198,15 +1218,15 @@
                             console.error('Error sending data to the second server:', error);
                             // Handle errors or display error messages
                         });
-                        message.innerText='user created successfully'
+                    message.innerText = 'user created successfully'
                 })
                 .catch(error => {
                     // Handle errors
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.error('Error signing up:', errorCode, errorMessage);
-                    message.innerText='An error occured in creating user kindly try again'
-                    message.style.color='red'
+                    message.innerText = 'An error occured in creating user kindly try again'
+                    message.style.color = 'red'
                 });
         };
     </script>
