@@ -34327,5 +34327,9 @@ div.tagsinput span.tag a {
 select {
   cursor: pointer !important;
 }
+.table th{
+  white-space: nowrap;
+}
+
 
 /*# sourceMappingURL=maps/style.css.map */

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
-            <link rel="shortcut icon" href="../../images/favicon.ico" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
 
     <!-- endinject -->
     <!-- plugin css for this page -->
@@ -764,20 +764,20 @@
                     </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="../memberManagement.html">
-              <i class="fa-solid fa-users-gear menu-icon"></i>
+                            <i class="fa-solid fa-users-gear menu-icon"></i>
                             <span class="menu-title">Member Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../chatManagement/chatManagement.html">
-              <i class="far fa-regular fa-message menu-icon"></i>
+                            <i class="far fa-regular fa-message menu-icon"></i>
                             <span class="menu-title">Chat Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                             aria-controls="page-layouts">
-              <i class="fa-solid fa-table menu-icon"></i>
+                            <i class="fa-solid fa-table menu-icon"></i>
                             <span class="menu-title">Report</span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -801,7 +801,7 @@
                         </div>
                     </li>
 
-                     
+
                 </ul>
             </nav>
             <!-- partial -->
@@ -822,10 +822,10 @@
                         </nav> -->
                     </div>
 
-                    <div class="col-lg-12 grid-margin stretch-card">
+                    <!-- <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <!-- <h4 class="card-title">Game Report</h4> -->
+                                <!-- <h4 class="card-title">Game Report</h4> --
                                 <div class="row">
                                     <div class="" style="width: 100%;">
                                         <div class="table-responsive">
@@ -833,10 +833,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            User Id
-                                                        </th>
-                                                        <th>
-                                                            Username
+                                                            Game
                                                         </th>
                                                         <th>
                                                             Total Wagered
@@ -845,17 +842,173 @@
                                                             Total Payout
                                                         </th>
                                                         <th>
-                                                            GGR
+                                                            Total GGR
+                                                        </th>
+                                                        <th>
+                                                            GGR %
+                                                        </th>
+                                                        <th>
+                                                            Bet Count
+                                                        </th>
+                                                        <th>
+                                                            Player Count
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id='game-report-table'>
 
-                                                    <!-- <p id="loading-daily">loading</p> -->
-                                                    
+                                                    <!-- <p id="loading-daily">loading</p> --
+
                                                 </tbody>
                                             </table>
+
+
+
                                             <p id="loading-daily" style="text-align: center;margin-top: 20px;">
+                                                loading</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-xl-auto grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <h4 class="card-title">Game Report</h4> -->
+                                <div class="row">
+                                    <div class="" style="width: 100%;">
+                                        <div class="table-responsive">
+                                            <table class="table" >
+                                                
+                                                <thead>
+                                                    <tr>
+                                                        <th style=" text-align: center;">
+                                                Game
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    Total Wagered
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    Total Payout
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    Total GGR
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    GGR %
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    Bet Count
+                                                </th>
+                                                <th style="text-align: center;">
+                                                    Player Count
+                                                </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class=" table table-striped" ">
+                                                                <thead>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>&nbsp;</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                <tbody id=" all-head">
+                                                </tbody>
+                                                </thead>
+                                            </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Daily Total Wagered</th>
+                                                            <th>Dice Daily Total Wagered</th>
+                                                            <th>Mines Daily Total Wagered</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" daily-total-wagered">
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Daily Payout</th>
+                                                            <th>Daily Daily Payout</th>
+                                                            <th>Mines Daily Payout</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" daily-payout">
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Daily GGR</th>
+                                                            <th>Daily Daily GGR</th>
+                                                            <th>Mines Daily GGR</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" daily-ggr">
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Daily Percentage</th>
+                                                            <th>Daily Daily Percentage</th>
+                                                            <th>Mines Daily Percentage</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" daily-percentage">
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Bet Count</th>
+                                                            <th>Dice Bet Count</th>
+                                                            <th>Mine Bet Count</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" bet-count">
+
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Crash Player Count</th>
+                                                            <th>Dice Player Count</th>
+                                                            <th>Mines Player Count</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id=" Player-count">
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+
+                                            </tr>
+                                            </tbody>
+                                            </table>
+
+                                            <p id="loading-daily-game" style="margin-top: 20px;">
                                                 loading</p>
                                         </div>
                                     </div>
@@ -871,7 +1024,7 @@
                             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023
                                 <a href="/" target="_blank">DotPlayPlay</a>. All rights
                                 reserved.</span>
-                                           </div>
+                        </div>
                     </footer>
                     <!-- partial -->
                 </div>
