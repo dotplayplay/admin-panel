@@ -58,8 +58,7 @@
           let row = $('<tr>')
           row.append(
             '<td><a href="' +
-              serverUrl +
-              '/admin/member/' +
+              'http://127.0.0.1:5500/administration/pages/profile/profile.html?id=' +
               member.user_id +
               '" target="_blank">' +
               member.user_id +
@@ -202,7 +201,7 @@
         console.log(res)
         if (res) {
           const loading = document.getElementById('loading-daily-game')
-          loading.innerText = 'the data is here'
+          loading.innerText = ''
         }
         const allHead = $('#all-head')
         const wagerHead = $('#daily-total-wagered')
