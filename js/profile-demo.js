@@ -20,8 +20,12 @@
         $('#fullname').text(`${res.firstname}  ${res.lastname}`)
         $('#username').text(res.username)
         $('#google-auth').text(res.google_auth)
-        $('#createdAt').text(res.created_at)
-        $('#last-login-at').text(res.lastLoginAt)
+        $('#createdAt').text(
+          new Date(res.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+        )
+        $('#last-login-at').text(
+          new Date(res.lastLoginAt).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+        )
         $('#provider').text(res.provider)
         $('#email-verified').text(res.emailVerified)
         $('#last-login-ip').text(res.last_login_ip)
@@ -42,7 +46,9 @@
         $('#earn-me').text(res.earn_me)
         $('#commision-reward').text(res.commission_reward)
         $('#usd-reward').text(res.usd_reward)
-        $('#joined-at').text(res.joined_at)
+        $('#joined-at').text(
+          new Date(res.joined_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+        )
         $('#account-type').text(res.account_type)
         $('#total-chat').text(res.total_chat_messages)
         $('#Weekly-wagered').text(res.weekly_wagered)
