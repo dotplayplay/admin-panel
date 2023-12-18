@@ -1,24 +1,41 @@
-;(function ($) {
-  'use strict'
+(function ($) {
+  "use strict";
   $(function () {
-    if ($('#orders-chart').length) {
-      var currentChartCanvas = $('#orders-chart').get(0).getContext('2d')
+    if ($("#orders-chart").length) {
+      var currentChartCanvas = $("#orders-chart").get(0).getContext("2d");
       var currentChart = new Chart(currentChartCanvas, {
-        type: 'bar',
+        type: "bar",
         data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
           datasets: [
             {
-              label: 'Delivered',
-              data: [260, 380, 230, 400, 780, 530, 340, 200, 400, 650, 780, 500],
-              backgroundColor: '#392c70'
+              label: "Delivered",
+              data: [
+                260, 380, 230, 400, 780, 530, 340, 200, 400, 650, 780, 500,
+              ],
+              backgroundColor: "#392c70",
             },
             {
-              label: 'Estimated',
-              data: [480, 600, 510, 600, 1000, 570, 500, 350, 450, 710, 820, 650],
-              backgroundColor: '#d1cede'
-            }
-          ]
+              label: "Estimated",
+              data: [
+                480, 600, 510, 600, 1000, 570, 500, 350, 450, 710, 820, 650,
+              ],
+              backgroundColor: "#d1cede",
+            },
+          ],
         },
         options: {
           responsive: true,
@@ -28,645 +45,716 @@
               left: 0,
               right: 0,
               top: 20,
-              bottom: 0
-            }
+              bottom: 0,
+            },
           },
           scales: {
             yAxes: [
               {
                 gridLines: {
-                  drawBorder: false
+                  drawBorder: false,
                 },
                 ticks: {
                   stepSize: 250,
-                  fontColor: '#686868'
-                }
-              }
+                  fontColor: "#686868",
+                },
+              },
             ],
             xAxes: [
               {
                 stacked: true,
                 ticks: {
                   beginAtZero: true,
-                  fontColor: '#686868'
+                  fontColor: "#686868",
                 },
                 gridLines: {
-                  display: false
+                  display: false,
                 },
-                barPercentage: 0.4
-              }
-            ]
+                barPercentage: 0.4,
+              },
+            ],
           },
           legend: {
-            display: false
+            display: false,
           },
           elements: {
             point: {
-              radius: 0
-            }
+              radius: 0,
+            },
           },
           legendCallback: function (chart) {
-            var text = []
-            text.push('<ul class="legend' + chart.id + '">')
+            var text = [];
+            text.push('<ul class="legend' + chart.id + '">');
             for (var i = 0; i < chart.data.datasets.length; i++) {
               text.push(
                 '<li><span class="legend-label" style="background-color:' +
                   chart.data.datasets[i].backgroundColor +
                   '"></span>'
-              )
+              );
               if (chart.data.datasets[i].label) {
-                text.push(chart.data.datasets[i].label)
+                text.push(chart.data.datasets[i].label);
               }
-              text.push('</li>')
+              text.push("</li>");
             }
-            text.push('</ul>')
-            return text.join('')
-          }
-        }
-      })
-      document.getElementById('orders-chart-legend').innerHTML = currentChart.generateLegend()
+            text.push("</ul>");
+            return text.join("");
+          },
+        },
+      });
+      document.getElementById("orders-chart-legend").innerHTML =
+        currentChart.generateLegend();
     }
-    if ($('#sales-chart').length) {
-      var lineChartCanvas = $('#sales-chart').get(0).getContext('2d')
+    if ($("#sales-chart").length) {
+      var lineChartCanvas = $("#sales-chart").get(0).getContext("2d");
       var data = {
-        labels: ['2013', '2014', '2014', '2015', '2016', '2017', '2018'],
+        labels: ["2013", "2014", "2014", "2015", "2016", "2017", "2018"],
         datasets: [
           {
-            label: 'Support',
+            label: "Support",
             data: [1500, 7030, 1050, 2300, 3510, 6800, 4500],
-            borderColor: ['#392c70'],
+            borderColor: ["#392c70"],
             borderWidth: 3,
-            fill: false
+            fill: false,
           },
           {
-            label: 'Product',
+            label: "Product",
             data: [5500, 4080, 3050, 5600, 4510, 5300, 2400],
-            borderColor: ['#d1cede'],
+            borderColor: ["#d1cede"],
             borderWidth: 3,
-            fill: false
-          }
-        ]
-      }
+            fill: false,
+          },
+        ],
+      };
       var options = {
         scales: {
           yAxes: [
             {
               gridLines: {
-                drawBorder: false
+                drawBorder: false,
               },
               ticks: {
                 stepSize: 2000,
-                fontColor: '#686868'
-              }
-            }
+                fontColor: "#686868",
+              },
+            },
           ],
           xAxes: [
             {
               display: false,
               gridLines: {
-                drawBorder: false
-              }
-            }
-          ]
+                drawBorder: false,
+              },
+            },
+          ],
         },
         legend: {
-          display: false
+          display: false,
         },
         elements: {
           point: {
-            radius: 3
-          }
+            radius: 3,
+          },
         },
-        stepsize: 1
-      }
+        stepsize: 1,
+      };
       var lineChart = new Chart(lineChartCanvas, {
-        type: 'line',
+        type: "line",
         data: data,
-        options: options
-      })
+        options: options,
+      });
     }
-    if ($('#sales-status-chart').length) {
-      var pieChartCanvas = $('#sales-status-chart').get(0).getContext('2d')
+    if ($("#sales-status-chart").length) {
+      var pieChartCanvas = $("#sales-status-chart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas, {
-        type: 'pie',
+        type: "pie",
         data: {
           datasets: [
             {
               data: [75, 25, 15, 10],
-              backgroundColor: ['#392c70', '#04b76b', '#ff5e6d', '#eeeeee'],
-              borderColor: ['#392c70', '#04b76b', '#ff5e6d', '#eeeeee']
-            }
+              backgroundColor: ["#392c70", "#04b76b", "#ff5e6d", "#eeeeee"],
+              borderColor: ["#392c70", "#04b76b", "#ff5e6d", "#eeeeee"],
+            },
           ],
 
           // These labels appear in the legend and in the tooltips when hovering different arcs
-          labels: ['Active users', 'Subscribers', 'New visitors', 'Others']
+          labels: ["Active users", "Subscribers", "New visitors", "Others"],
         },
         options: {
           responsive: true,
           animation: {
             animateScale: true,
-            animateRotate: true
+            animateRotate: true,
           },
           legend: {
-            display: false
+            display: false,
           },
           legendCallback: function (chart) {
-            var text = []
-            text.push('<ul class="legend' + chart.id + '">')
+            var text = [];
+            text.push('<ul class="legend' + chart.id + '">');
             for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
               text.push(
                 '<li><span class="legend-label" style="background-color:' +
                   chart.data.datasets[0].backgroundColor[i] +
                   '"></span>'
-              )
+              );
               if (chart.data.labels[i]) {
-                text.push(chart.data.labels[i])
+                text.push(chart.data.labels[i]);
               }
               text.push(
                 '<label class="badge badge-light badge-pill legend-percentage ml-auto">' +
                   chart.data.datasets[0].data[i] +
-                  '%</label>'
-              )
-              text.push('</li>')
+                  "%</label>"
+              );
+              text.push("</li>");
             }
-            text.push('</ul>')
-            return text.join('')
-          }
-        }
-      })
-      document.getElementById('sales-status-chart-legend').innerHTML = pieChart.generateLegend()
+            text.push("</ul>");
+            return text.join("");
+          },
+        },
+      });
+      document.getElementById("sales-status-chart-legend").innerHTML =
+        pieChart.generateLegend();
     }
-    if ($('#registered-users-chart').length) {
+    if ($("#registered-users-chart").length) {
       $.ajax({
-        url: 'http://localhost:8000/admin/userstats',
-        method: 'GET',
-        dataType: 'json',
+        url: "http://localhost:8000/admin/userstats",
+        method: "GET",
+        dataType: "json",
         success: function (data) {
-          console.log(data)
-          const months = data.registeredUser.map(item => item.month)
+          console.log(data);
+          const months = data.registeredUser.map((item) => item.month);
 
-          const backgroundColor = data.registeredUser.map(item => item.backgroundColor)
-          const borderColor = data.registeredUser.map(item => item.borderColor)
+          const backgroundColor = data.registeredUser.map(
+            (item) => item.backgroundColor
+          );
+          const borderColor = data.registeredUser.map(
+            (item) => item.borderColor
+          );
 
-          const totalUsers = data.registeredUser.reduce((sum, monthData) => sum + monthData.noOfRegisteredUsers, 0)
-          const percentages = data.registeredUser.map(monthData =>
+          const totalUsers = data.registeredUser.reduce(
+            (sum, monthData) => sum + monthData.noOfRegisteredUsers,
+            0
+          );
+          const percentages = data.registeredUser.map((monthData) =>
             ((monthData.noOfRegisteredUsers / totalUsers) * 100).toFixed(2)
-          )
+          );
 
-          var pieChartCanvas = $('#registered-users-chart').get(0).getContext('2d')
+          var pieChartCanvas = $("#registered-users-chart")
+            .get(0)
+            .getContext("2d");
           var pieChart = new Chart(pieChartCanvas, {
-            type: 'pie',
+            type: "pie",
             data: {
               datasets: [
                 {
                   data: percentages,
                   backgroundColor,
-                  borderColor
-                }
+                  borderColor,
+                },
               ],
 
               // These labels appear in the legend and in the tooltips when hovering different arcs
-              labels: months
+              labels: months,
             },
             options: {
               responsive: true,
               animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
               },
               legend: {
-                display: false
+                display: false,
               },
               legendCallback: function (chart) {
-                var text = []
-                text.push('<ul class="legend' + chart.id + '">')
+                var text = [];
+                text.push('<ul class="legend' + chart.id + '">');
                 for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
                   text.push(
                     '<li><span class="legend-label" style="background-color:' +
                       chart.data.datasets[0].backgroundColor[i] +
                       '"></span>'
-                  )
+                  );
                   if (chart.data.labels[i]) {
-                    text.push(chart.data.labels[i])
+                    text.push(chart.data.labels[i]);
                   }
                   text.push(
                     '<label class="badge badge-light badge-pill legend-percentage ml-auto">' +
                       chart.data.datasets[0].data[i] +
-                      '%</label>'
-                  )
-                  text.push('</li>')
+                      "%</label>"
+                  );
+                  text.push("</li>");
                 }
-                text.push('</ul>')
-                return text.join('')
-              }
-            }
-          })
-          document.getElementById('registered-users-chart-legend').innerHTML = pieChart.generateLegend()
+                text.push("</ul>");
+                return text.join("");
+              },
+            },
+          });
+          document.getElementById("registered-users-chart-legend").innerHTML =
+            pieChart.generateLegend();
         },
         error: function (xhr, status, error) {
-          console.error('Error fetching data:', error)
-        }
-      })
+          console.error("Error fetching data:", error);
+        },
+      });
     }
-    if ($('#wagered-won-chart').length) {
+    if ($("#wagered-won-chart").length) {
       $.ajax({
-        url: 'http://localhost:8000/admin/wageredwonstats',
-        method: 'GET',
-        dataType: 'json',
+        url: "http://localhost:8000/admin/wageredwonstats",
+        method: "GET",
+        dataType: "json",
         success: function (data) {
-          const months = data.totalWagered.map(item => item.month)
-          const backgroundColor = data.totalWagered.map(item => item.backgroundColor)
-          const borderColor = data.totalWagered.map(item => item.borderColor)
+          const months = data.totalWagered.map((item) => item.month);
+          const backgroundColor = data.totalWagered.map(
+            (item) => item.backgroundColor
+          );
+          const borderColor = data.totalWagered.map((item) => item.borderColor);
 
-          const totalUsers = data.totalWagered.reduce((sum, monthData) => sum + monthData.totalAmount, 0)
-          const percentages = data.totalWagered.map(monthData =>
+          const totalUsers = data.totalWagered.reduce(
+            (sum, monthData) => sum + monthData.totalAmount,
+            0
+          );
+          const percentages = data.totalWagered.map((monthData) =>
             ((monthData.totalAmount / totalUsers) * 100).toFixed(2)
-          )
+          );
 
-          var pieChartCanvas = $('#wagered-won-chart').get(0).getContext('2d')
+          var pieChartCanvas = $("#wagered-won-chart").get(0).getContext("2d");
           var pieChart = new Chart(pieChartCanvas, {
-            type: 'pie',
+            type: "pie",
             data: {
               datasets: [
                 {
                   data: percentages,
                   backgroundColor,
-                  borderColor
-                }
+                  borderColor,
+                },
               ],
 
               // These labels appear in the legend and in the tooltips when hovering different arcs
-              labels: months
+              labels: months,
             },
             options: {
               responsive: true,
               animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
               },
               legend: {
-                display: false
+                display: false,
               },
               legendCallback: function (chart) {
-                var text = []
-                text.push('<ul class="legend' + chart.id + '">')
+                var text = [];
+                text.push('<ul class="legend' + chart.id + '">');
                 for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
                   text.push(
                     '<li><span class="legend-label" style="background-color:' +
                       chart.data.datasets[0].backgroundColor[i] +
                       '"></span>'
-                  )
+                  );
                   if (chart.data.labels[i]) {
-                    text.push(chart.data.labels[i])
+                    text.push(chart.data.labels[i]);
                   }
                   text.push(
                     '<label class="badge badge-light badge-pill legend-percentage ml-auto">' +
                       chart.data.datasets[0].data[i] +
-                      '%</label>'
-                  )
-                  text.push('</li>')
+                      "%</label>"
+                  );
+                  text.push("</li>");
                 }
-                text.push('</ul>')
-                return text.join('')
-              }
-            }
-          })
-          document.getElementById('wagered-won-chart-legend').innerHTML = pieChart.generateLegend()
+                text.push("</ul>");
+                return text.join("");
+              },
+            },
+          });
+          document.getElementById("wagered-won-chart-legend").innerHTML =
+            pieChart.generateLegend();
         },
         error: function (xhr, status, error) {
-          console.error('Error fetching data:', error)
-        }
-      })
+          console.error("Error fetching data:", error);
+        },
+      });
     }
-    if ($('#daily-sales-chart').length) {
+    if ($("#daily-sales-chart").length) {
       var dailySalesChartData = {
         datasets: [
           {
             data: [50, 10, 10, 30],
-            backgroundColor: ['#392c70', '#04b76b', '#e9e8ef', '#ff5e6d'],
-            borderWidth: 0
-          }
+            backgroundColor: ["#392c70", "#04b76b", "#e9e8ef", "#ff5e6d"],
+            borderWidth: 0,
+          },
         ],
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: ['Mail order sales', 'Instore sales', 'Download sales', 'Sales return']
-      }
+        labels: [
+          "Mail order sales",
+          "Instore sales",
+          "Download sales",
+          "Sales return",
+        ],
+      };
       var dailySalesChartOptions = {
         responsive: true,
         maintainAspectRatio: true,
         animation: {
           animateScale: true,
-          animateRotate: true
+          animateRotate: true,
         },
         legend: {
-          display: false
+          display: false,
         },
         legendCallback: function (chart) {
-          var text = []
-          text.push('<ul class="legend' + chart.id + '">')
+          var text = [];
+          text.push('<ul class="legend' + chart.id + '">');
           for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
             text.push(
               '<li><span class="legend-label" style="background-color:' +
                 chart.data.datasets[0].backgroundColor[i] +
                 '"></span>'
-            )
+            );
             if (chart.data.labels[i]) {
-              text.push(chart.data.labels[i])
+              text.push(chart.data.labels[i]);
             }
-            text.push('</li>')
+            text.push("</li>");
           }
-          text.push('</ul>')
-          return text.join('')
+          text.push("</ul>");
+          return text.join("");
         },
-        cutoutPercentage: 70
-      }
-      var dailySalesChartCanvas = $('#daily-sales-chart').get(0).getContext('2d')
+        cutoutPercentage: 70,
+      };
+      var dailySalesChartCanvas = $("#daily-sales-chart")
+        .get(0)
+        .getContext("2d");
       var dailySalesChart = new Chart(dailySalesChartCanvas, {
-        type: 'doughnut',
+        type: "doughnut",
         data: dailySalesChartData,
-        options: dailySalesChartOptions
-      })
-      document.getElementById('daily-sales-chart-legend').innerHTML = dailySalesChart.generateLegend()
+        options: dailySalesChartOptions,
+      });
+      document.getElementById("daily-sales-chart-legend").innerHTML =
+        dailySalesChart.generateLegend();
     }
-    if ($('#inline-datepicker-example').length) {
-      $('#inline-datepicker-example').datepicker({
+    if ($("#inline-datepicker-example").length) {
+      $("#inline-datepicker-example").datepicker({
         enableOnReadonly: true,
-        todayHighlight: true
-      })
+        todayHighlight: true,
+      });
     }
     // Fetch data for pending Withdrawals
-    fetchDataAndRender('server_endpoint', 'pendingWithdrawals')
+    fetchDataAndRender("server_endpoint", "pendingWithdrawals");
 
     // Fetch data for pending Claim
-    fetchDataAndRender('server_endpoint', 'pendingClaim')
+    fetchDataAndRender("server_endpoint", "pendingClaim");
 
     // Fetch data for pending Deposit
-    fetchDataAndRender('server_endpoint', 'pendingDeposit')
+    fetchDataAndRender("server_endpoint", "pendingDeposit");
 
     // Reusable function to fetch data and render for a specific table
     function fetchDataAndRender(endpoint, containerId) {
       $.ajax({
         url: endpoint,
-        method: 'GET',
-        dataType: 'json',
+        method: "GET",
+        dataType: "json",
         success: function (data) {
-          renderData(data, containerId)
+          renderData(data, containerId);
         },
         error: function (xhr, status, error) {
-          console.error('Error fetching data:', error)
-        }
-      })
+          console.error("Error fetching data:", error);
+        },
+      });
     }
 
     // Reusable function to render data in the specified format for a specific container
     function renderData(data, containerId) {
-      var container = $('#' + containerId)
+      var container = $("#" + containerId);
 
       // Clear existing data in the container
-      container.empty()
+      container.empty();
 
       // Iterate over each data object and append a new row
       $.each(data, function (index, item) {
-        var row = $('<tr>')
-        row.append('<td class="font-weight-bold">' + item.name + '</td>')
-        row.append('<td class="text-muted">' + item.code + '</td>')
-        row.append('<td>' + item.quantity + '</td>')
-        row.append('<td><label class="badge badge-success badge-pill">' + item.status + '</label></td>')
+        var row = $("<tr>");
+        row.append('<td class="font-weight-bold">' + item.name + "</td>");
+        row.append('<td class="text-muted">' + item.code + "</td>");
+        row.append("<td>" + item.quantity + "</td>");
+        row.append(
+          '<td><label class="badge badge-success badge-pill">' +
+            item.status +
+            "</label></td>"
+        );
 
         // Append the row to the container
-        container.append(row)
-      })
+        container.append(row);
+      });
     }
     function fetchShowValues() {
       $.ajax({
-        url: 'http://localhost:8000/admin/dashboard',
-        method: 'GET',
-        dataType: 'json',
+        url: "http://localhost:8000/admin/dashboard",
+        method: "GET",
+        dataType: "json",
         success: function (res) {
-          const data = res.data
-          console.log(data)
+          const data = res.data;
+          console.log(data);
           // Get each of the displayed elements using jQuery
-          $('#total-deposited-players').text(data.totalDepositedPlayers)
-          $('#total-deposited-players-type').text(
+          $("#total-deposited-players").text(data.totalDepositedPlayers);
+          $("#total-deposited-players-type").text(
             `${data.totalDepositedPlayers.percent} ${data.totalDepositedPlayers.type}`
-          )
-          $('#total-gross-gaming-revenue').text(data.grossGamingRevenue)
-          $('#total-gross-gaming-revenue-type').text(
+          );
+          $("#total-gross-gaming-revenue").text(data.grossGamingRevenue);
+          $("#total-gross-gaming-revenue-type").text(
             `${data.grossGamingRevenue.percent} ${data.grossGamingRevenue.type}`
-          )
-          $('#total-player-balance').text(data.totalPlayerBalance)
-          $('#total-player-balance-type').text(`${data.totalPlayerBalance.percent} ${data.totalPlayerBalance.type}`)
-          $('#total-wagered-ranking').text(data.totalWagered)
-          $('#total-wagered-ranking-type').text(`${data.totalWagered.percent} ${data.totalWagered.type}`)
-          $('#total-win-ranking').text(data.totalWon)
-          $('#total-win-ranking-type').text(`${data.totalWon.percent} ${data.totalWon.type}`)
-          $('#total-lose-ranking').text(data.totalLoss)
-          $('#total-lose-ranking-type').text(`${data.totalLoss.percent} ${data.totalLoss.type}`)
+          );
+          $("#total-player-balance").text(data.totalPlayerBalance);
+          $("#total-player-balance-type").text(
+            `${data.totalPlayerBalance.percent} ${data.totalPlayerBalance.type}`
+          );
+          $("#total-wagered-ranking").text(data.totalWagered);
+          $("#total-wagered-ranking-type").text(
+            `${data.totalWagered.percent} ${data.totalWagered.type}`
+          );
+          $("#total-win-ranking").text(data.totalWon);
+          $("#total-win-ranking-type").text(
+            `${data.totalWon.percent} ${data.totalWon.type}`
+          );
+          $("#total-lose-ranking").text(data.totalLoss);
+          $("#total-lose-ranking-type").text(
+            `${data.totalLoss.percent} ${data.totalLoss.type}`
+          );
         },
         error: function (xhr, status, error) {
-          console.error('Error fetching data:', error)
-        }
-      })
+          console.error("Error fetching data:", error);
+        },
+      });
     }
 
     // Trigger the fetchShowValues function on document ready
-    fetchShowValues()
+    fetchShowValues();
 
     $.ajax({
-      url: 'http://localhost:8000/admin/wageredranking',
-      method: 'GET',
-      dataType: 'json',
+      url: "http://localhost:8000/admin/wageredranking",
+      method: "GET",
+      dataType: "json",
       success: function (res) {
-        console.log(res)
-        renderWageredRanking(res)
+        console.log(res);
+        renderWageredRanking(res);
       },
       error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-      }
-    })
+        console.error("Error fetching data:", error);
+      },
+    });
 
     // Function to render data in the member table
     function renderWageredRanking(data) {
-      var tableBody = $('#total-wagered-ranking-table')
+      var tableBody = $("#total-wagered-ranking-table");
 
       // Clear existing data in the table
-      tableBody.empty()
+      tableBody.empty();
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.lastname + ' ' + member.firstname + '</td>')
-        row.append('<td>' + member.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.phone + '</td>')
-        row.append('<td>' + member.born + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.hide_profile + '</td>')
-        row.append('<td>' + member.hidden_from_public + '</td>')
-        row.append('<td>' + member.refuse_friends_request + '</td>')
-        row.append('<td>' + member.refuse_tips + '</td>')
-        row.append('<td>' + member.vip_level + '</td>')
-        row.append('<td>' + member.kyc_is_activated + '</td>')
-        row.append('<td>' + member.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.invited_code + '</td>')
-        row.append('<td>' + member.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.is_suspend + '</td>')
-        row.append('<td>' + member.vip_progress + '</td>')
-        row.append('<td>' + member.fa_is_activated + '</td>')
-        row.append('<td>' + member.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.usd_reward.toFixed(2) + '</td>')
+        var row = $("<tr>");
         row.append(
-          '<td>' +
-            new Date(member.joined_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.account_type + '</td>')
-        row.append('<td>' + member.total_chat_messages + '</td>')
-        row.append('<td>' + member.weekly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
+          '<td class="py-1"><img src=' +
+            member.profile_image +
+            'alt="image" /></td>'
+        );
+        row.append("<td>" + member.user_id + "</td>");
+        row.append("<td>" + member.lastname + " " + member.firstname + "</td>");
+        row.append("<td>" + member.username + "</td>");
+        row.append("<td>" + member.email + "</td>");
+        row.append("<td>" + member.phone + "</td>");
+        row.append("<td>" + member.born + "</td>");
+        row.append("<td>" + member.next_level_point + "</td>");
+        row.append("<td>" + member.hide_profile + "</td>");
+        row.append("<td>" + member.hidden_from_public + "</td>");
+        row.append("<td>" + member.refuse_friends_request + "</td>");
+        row.append("<td>" + member.refuse_tips + "</td>");
+        row.append("<td>" + member.vip_level + "</td>");
+        row.append("<td>" + member.kyc_is_activated + "</td>");
+        row.append("<td>" + member.total_wagered.toFixed(2) + "</td>");
+        row.append("<td>" + member.invited_code + "</td>");
+        row.append("<td>" + member.google_auth_is_activated + "</td>");
+        row.append("<td>" + member.is_suspend + "</td>");
+        row.append("<td>" + member.vip_progress + "</td>");
+        row.append("<td>" + member.fa_is_activated + "</td>");
+        row.append("<td>" + member.earn_me.toFixed(2) + "</td>");
+        row.append("<td>" + member.commission_reward.toFixed(2) + "</td>");
+        row.append("<td>" + member.usd_reward.toFixed(2) + "</td>");
+        row.append(
+          "<td>" +
+            new Date(member.joined_at).toLocaleString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }) +
+            "</td>"
+        );
+        row.append("<td>" + member.account_type + "</td>");
+        row.append("<td>" + member.total_chat_messages + "</td>");
+        row.append("<td>" + member.weekly_wagered + "</td>");
+        row.append("<td>" + member.monthly_wagered + "</td>");
 
         // Append the row to the table body
-        tableBody.append(row)
-      })
+        tableBody.append(row);
+      });
     }
+
     $.ajax({
-      url: 'http://localhost:8000/admin/wonranking',
-      method: 'GET',
-      dataType: 'json',
+      url: "http://localhost:8000/admin/wonranking",
+      method: "GET",
+      dataType: "json",
       success: function (res) {
-        console.log(res)
-        renderWonRanking(res.wonRanking)
+        console.log(res);
+        renderWonRanking(res.wonRanking);
       },
       error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-      }
-    })
+        console.error("Error fetching data:", error);
+      },
+    });
 
     // Function to render data in the member table
     function renderWonRanking(data) {
-      var tableBody = $('#total-won-ranking-table')
+      var tableBody = $("#total-won-ranking-table");
 
       // Clear existing data in the table
-      tableBody.empty()
+      tableBody.empty();
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
-        row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.profile.totalWon + '</td>')
-        row.append('<td>' + member.provider + '</td>')
-        row.append('<td>' + member.emailVerified + '</td>')
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.profile.hide_profile + '</td>')
-        row.append('<td>' + member.profile.hidden_from_public + '</td>')
-        row.append('<td>' + member.profile.refuse_friends_request + '</td>')
-        row.append('<td>' + member.profile.refuse_tips + '</td>')
-        row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.kyc_is_activated + '</td>')
-        row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.profile.is_suspend + '</td>')
-        row.append('<td>' + member.profile.vip_progress + '</td>')
-        row.append('<td>' + member.profile.fa_is_activated + '</td>')
-        row.append('<td>' + member.profile.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.usd_reward.toFixed(2) + '</td>')
+        var row = $("<tr>");
         row.append(
-          '<td>' +
-            new Date(member.profile.joined_at).toLocaleString('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
+          '<td class="py-1"><img src=' +
+            member.profile.profile_image +
+            'alt="image" /></td>'
+        );
+        row.append("<td>" + member.user_id + "</td>");
+        row.append(
+          "<td>" +
+            member.profile.lastname +
+            " " +
+            member.profile.firstname +
+            "</td>"
+        );
+        row.append("<td>" + member.profile.username + "</td>");
+        row.append("<td>" + member.email + "</td>");
+        row.append("<td>" + member.profile.phone + "</td>");
+        row.append("<td>" + member.profile.totalWon + "</td>");
+        row.append("<td>" + member.provider + "</td>");
+        row.append("<td>" + member.emailVerified + "</td>");
+        row.append("<td>" + member.last_login_ip + "</td>");
+        row.append("<td>" + member.next_level_point + "</td>");
+        row.append("<td>" + member.profile.hide_profile + "</td>");
+        row.append("<td>" + member.profile.hidden_from_public + "</td>");
+        row.append("<td>" + member.profile.refuse_friends_request + "</td>");
+        row.append("<td>" + member.profile.refuse_tips + "</td>");
+        row.append("<td>" + member.profile.vip_level + "</td>");
+        row.append("<td>" + member.profile.kyc_is_activated + "</td>");
+        row.append("<td>" + member.profile.total_wagered.toFixed(2) + "</td>");
+        row.append("<td>" + member.profile.invited_code + "</td>");
+        row.append("<td>" + member.profile.google_auth_is_activated + "</td>");
+        row.append("<td>" + member.profile.is_suspend + "</td>");
+        row.append("<td>" + member.profile.vip_progress + "</td>");
+        row.append("<td>" + member.profile.fa_is_activated + "</td>");
+        row.append("<td>" + member.profile.earn_me.toFixed(2) + "</td>");
+        row.append(
+          "<td>" + member.profile.commission_reward.toFixed(2) + "</td>"
+        );
+        row.append("<td>" + member.profile.usd_reward.toFixed(2) + "</td>");
+        row.append(
+          "<td>" +
+            new Date(member.profile.joined_at).toLocaleString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
             }) +
-            '</td>'
-        )
-        row.append('<td>' + member.profile.account_type + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.profile.weekly_wagered + '</td>')
-        row.append('<td>' + member.profile.monthly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
+            "</td>"
+        );
+        row.append("<td>" + member.profile.account_type + "</td>");
+        row.append("<td>" + member.profile.total_chat_messages + "</td>");
+        row.append("<td>" + member.profile.weekly_wagered + "</td>");
+        row.append("<td>" + member.profile.monthly_wagered + "</td>");
+        row.append("<td>" + member.monthly_wagered + "</td>");
 
         // Append the row to the table body
-        tableBody.append(row)
-      })
+        tableBody.append(row);
+      });
     }
     $.ajax({
-      url: 'http://localhost:8000/admin/lossranking',
-      method: 'GET',
-      dataType: 'json',
+      url: "http://localhost:8000/admin/lossranking",
+      method: "GET",
+      dataType: "json",
       success: function (res) {
-        console.log(res)
-        renderLossRanking(res.lossRanking)
+        console.log(res);
+        renderLossRanking(res.lossRanking);
       },
       error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-      }
-    })
+        console.error("Error fetching data:", error);
+      },
+    });
 
     // Function to render data in the member table
     function renderLossRanking(data) {
-      var tableBody = $('#total-loss-ranking-table')
+      var tableBody = $("#total-loss-ranking-table");
 
       // Clear existing data in the table
-      tableBody.empty()
+      tableBody.empty();
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
-        row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.profile.totalLoss + '</td>')
-        row.append('<td>' + member.provider + '</td>')
-        row.append('<td>' + member.emailVerified + '</td>')
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td>' + member.next_level_point + '</td>')
-        row.append('<td>' + member.profile.hide_profile + '</td>')
-        row.append('<td>' + member.profile.hidden_from_public + '</td>')
-        row.append('<td>' + member.profile.refuse_friends_request + '</td>')
-        row.append('<td>' + member.profile.refuse_tips + '</td>')
-        row.append('<td>' + member.profile.vip_level + '</td>')
-        row.append('<td>' + member.profile.kyc_is_activated + '</td>')
-        row.append('<td>' + member.profile.total_wagered.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.google_auth_is_activated + '</td>')
-        row.append('<td>' + member.profile.is_suspend + '</td>')
-        row.append('<td>' + member.profile.vip_progress + '</td>')
-        row.append('<td>' + member.profile.fa_is_activated + '</td>')
-        row.append('<td>' + member.profile.earn_me.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.commission_reward.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile.usd_reward.toFixed(2) + '</td>')
+        var row = $("<tr>");
         row.append(
-          '<td>' +
-            new Date(member.profile.joined_at).toLocaleString('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
+          '<td class="py-1"><img src=' +
+            member.profile.profile_image +
+            'alt="image" /></td>'
+        );
+        row.append("<td>" + member.user_id + "</td>");
+        row.append(
+          "<td>" +
+            member.profile.lastname +
+            " " +
+            member.profile.firstname +
+            "</td>"
+        );
+        row.append("<td>" + member.profile.username + "</td>");
+        row.append("<td>" + member.email + "</td>");
+        row.append("<td>" + member.profile.phone + "</td>");
+        row.append("<td>" + member.profile.totalLoss + "</td>");
+        row.append("<td>" + member.provider + "</td>");
+        row.append("<td>" + member.emailVerified + "</td>");
+        row.append("<td>" + member.last_login_ip + "</td>");
+        row.append("<td>" + member.next_level_point + "</td>");
+        row.append("<td>" + member.profile.hide_profile + "</td>");
+        row.append("<td>" + member.profile.hidden_from_public + "</td>");
+        row.append("<td>" + member.profile.refuse_friends_request + "</td>");
+        row.append("<td>" + member.profile.refuse_tips + "</td>");
+        row.append("<td>" + member.profile.vip_level + "</td>");
+        row.append("<td>" + member.profile.kyc_is_activated + "</td>");
+        row.append("<td>" + member.profile.total_wagered.toFixed(2) + "</td>");
+        row.append("<td>" + member.profile.invited_code + "</td>");
+        row.append("<td>" + member.profile.google_auth_is_activated + "</td>");
+        row.append("<td>" + member.profile.is_suspend + "</td>");
+        row.append("<td>" + member.profile.vip_progress + "</td>");
+        row.append("<td>" + member.profile.fa_is_activated + "</td>");
+        row.append("<td>" + member.profile.earn_me.toFixed(2) + "</td>");
+        row.append(
+          "<td>" + member.profile.commission_reward.toFixed(2) + "</td>"
+        );
+        row.append("<td>" + member.profile.usd_reward.toFixed(2) + "</td>");
+        row.append(
+          "<td>" +
+            new Date(member.profile.joined_at).toLocaleString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
             }) +
-            '</td>'
-        )
-        row.append('<td>' + member.profile.account_type + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.profile.weekly_wagered + '</td>')
-        row.append('<td>' + member.profile.monthly_wagered + '</td>')
-        row.append('<td>' + member.monthly_wagered + '</td>')
+            "</td>"
+        );
+        row.append("<td>" + member.profile.account_type + "</td>");
+        row.append("<td>" + member.profile.total_chat_messages + "</td>");
+        row.append("<td>" + member.profile.weekly_wagered + "</td>");
+        row.append("<td>" + member.profile.monthly_wagered + "</td>");
+        row.append("<td>" + member.monthly_wagered + "</td>");
 
         // Append the row to the table body
-        tableBody.append(row)
-      })
+        tableBody.append(row);
+      });
     }
-  })
-})(jQuery)
+  });
+})(jQuery);
