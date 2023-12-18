@@ -37,6 +37,7 @@
         $('#vip-level').text(res.vip_level)
         $('#profile-image').attr('src', res.profile_image)
         $('#kyc').text(res.kyc_is_activated)
+        console.log(res.total_wagered)
         $('#total-wagered').text(res.total_wagered)
         $('#invitation-code').text(res.invited_code)
         $('#google-auth-activated').text(res.google_auth_is_activated)
