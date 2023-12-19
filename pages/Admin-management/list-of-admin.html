@@ -1673,14 +1673,29 @@
     <!-- End custom js for this page-->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        fetchData();
-      });
-      const user = localStorage.getItem("user");
-      console.log(user);
+        const user = JSON.parse(localStorage.getItem("user"));
 
-      function fetchData() {
-        fetch("http://localhost:800/admin/wageredranking")
-          .then((response) => response.json())
+        if (!user || !user.accessToken) {
+          console.error("User or access token not found in local storage.");
+          return;
+        }
+        console.log(user.accessToken);
+        fetchData(user.accessToken);
+      });
+
+      function fetchData(accessToken) {
+        const order_url = "http://localhost:8001/admin/wageredranking";
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
+
+        fetch(order_url, { headers })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
           .then((data) => populateTable(data))
           .catch((error) => console.error("Error fetching data:", error));
       }
@@ -1688,21 +1703,28 @@
       function populateTable(data) {
         const tableBody = document.getElementById("tableBody");
 
+        if (!tableBody) {
+          console.error("Table body not found in the HTML.");
+          return;
+        }
+
         tableBody.innerHTML = "";
 
         if (Array.isArray(data)) {
           data.forEach((item) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-            <td>${item.adminID}</td>
-            <td>${item.username}</td>
-            <td>${item.status}</td>
-            <td>${item.account}</td>
-            <td>${item.access}</td>
-            <td>${item.activityLog}</td>
-        `;
+        <td>${item.adminID}</td>
+        <td>${item.username}</td>
+        <td>${item.status}</td>
+        <td>${item.account}</td>
+        <td>${item.access}</td>
+        <td>${item.activityLog}</td>
+      `;
             tableBody.appendChild(row);
           });
+        } else {
+          console.error("Invalid data format received from the API.");
         }
       }
     </script>

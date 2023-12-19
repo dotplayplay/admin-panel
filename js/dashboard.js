@@ -1,43 +1,38 @@
 (function ($) {
   "use strict";
   $(function () {
-<<<<<<< HEAD
-    if ($("#orders-chart").length) {
-      var currentChartCanvas = $("#orders-chart").get(0).getContext("2d");
-=======
-    console.log(serverUrl)
+    console.log(serverUrl);
     const backgroundColors = {
-      January: '#3498db',
-      Febuary: '#e74c3c',
-      March: '#2ecc71',
-      April: '#f39c12',
-      May: '#1abc9c',
-      June: '#9b59b6',
-      July: '#e67e22',
-      August: '#2c3e50',
-      September: '#27ae60',
-      October: '#c0392b',
-      November: '#7f8c8d',
-      December: '#d35400'
-    }
+      January: "#3498db",
+      Febuary: "#e74c3c",
+      March: "#2ecc71",
+      April: "#f39c12",
+      May: "#1abc9c",
+      June: "#9b59b6",
+      July: "#e67e22",
+      August: "#2c3e50",
+      September: "#27ae60",
+      October: "#c0392b",
+      November: "#7f8c8d",
+      December: "#d35400",
+    };
 
     const borderColors = {
-      January: '#2980b9',
-      Febuary: '#c0392b',
-      March: '#27ae60',
-      April: '#d68910',
-      May: '#16a085',
-      June: '#8e44ad',
-      July: '#d35400',
-      August: '#1f2c39',
-      September: '#229954',
-      October: '#a93226',
-      November: '#626567',
-      December: '#ba4e00'
-    }
-    if ($('#orders-chart').length) {
-      var currentChartCanvas = $('#orders-chart').get(0).getContext('2d')
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
+      January: "#2980b9",
+      Febuary: "#c0392b",
+      March: "#27ae60",
+      April: "#d68910",
+      May: "#16a085",
+      June: "#8e44ad",
+      July: "#d35400",
+      August: "#1f2c39",
+      September: "#229954",
+      October: "#a93226",
+      November: "#626567",
+      December: "#ba4e00",
+    };
+    if ($("#orders-chart").length) {
+      var currentChartCanvas = $("#orders-chart").get(0).getContext("2d");
       var currentChart = new Chart(currentChartCanvas, {
         type: "bar",
         data: {
@@ -252,35 +247,23 @@
     }
     if ($("#registered-users-chart").length) {
       $.ajax({
-<<<<<<< HEAD
-        url: "http://localhost:8000/admin/userstats",
+        url: serverUrl + "/admin/userstats",
         method: "GET",
         dataType: "json",
         success: function (data) {
           console.log(data);
+          if (data) {
+            const loading = document.getElementById("loading-user");
+            loading.innerText = "";
+          }
           const months = data.registeredUser.map((item) => item.month);
 
           const backgroundColor = data.registeredUser.map(
-            (item) => item.backgroundColor
+            (item) => backgroundColors[item.month]
           );
           const borderColor = data.registeredUser.map(
-            (item) => item.borderColor
+            (item) => borderColors[item.month]
           );
-=======
-        url: serverUrl + '/admin/userstats',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-          console.log(data)
-          if (data) {
-            const loading = document.getElementById('loading-user')
-            loading.innerText = ''
-          }
-          const months = data.registeredUser.map(item => item.month)
-
-          const backgroundColor = data.registeredUser.map(item => backgroundColors[item.month])
-          const borderColor = data.registeredUser.map(item => borderColors[item.month])
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
 
           const totalUsers = data.registeredUser.reduce(
             (sum, monthData) => sum + monthData.noOfRegisteredUsers,
@@ -344,50 +327,36 @@
             pieChart.generateLegend();
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
           console.error("Error fetching data:", error);
+          if (error) {
+            const loading = document.getElementById("loading-user");
+            loading.innerText = "An error ocurred try refreshing";
+            loading.style.color = "red";
+          }
         },
       });
-=======
-          console.error('Error fetching data:', error)
-          if (error) {
-            const loading = document.getElementById('loading-user')
-            loading.innerText = 'An error ocurred try refreshing'
-            loading.style.color = 'red'
-          }
-        }
-      })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
     }
     if ($("#wagered-won-chart").length) {
       $.ajax({
-<<<<<<< HEAD
-        url: "http://localhost:8000/admin/wageredwonstats",
+        url: serverUrl + "/admin/wageredwonstats",
         method: "GET",
         dataType: "json",
         success: function (data) {
-          const months = data.totalWagered.map((item) => item.month);
-          const backgroundColor = data.totalWagered.map(
-            (item) => item.backgroundColor
-          );
-          const borderColor = data.totalWagered.map((item) => item.borderColor);
-=======
-        url: serverUrl + '/admin/wageredwonstats',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-          console.log(data)
+          console.log(data);
           if (data) {
-            const loading = document.getElementById('loading-wager')
-            loading.innerText = ''
+            const loading = document.getElementById("loading-wager");
+            loading.innerText = "";
             if (data.totalWagered.length < 1) {
-              loading.innerText = 'No current data to be displayed'
+              loading.innerText = "No current data to be displayed";
             }
           }
-          const months = data.totalWagered.map(item => item.month)
-          const backgroundColor = data.totalWagered.map(item => backgroundColors[item.month])
-          const borderColor = data.totalWagered.map(item => borderColors[item.month])
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
+          const months = data.totalWagered.map((item) => item.month);
+          const backgroundColor = data.totalWagered.map(
+            (item) => backgroundColors[item.month]
+          );
+          const borderColor = data.totalWagered.map(
+            (item) => borderColors[item.month]
+          );
 
           const totalUsers = data.totalWagered.reduce(
             (sum, monthData) => sum + monthData.totalAmount,
@@ -449,20 +418,14 @@
             pieChart.generateLegend();
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
           console.error("Error fetching data:", error);
+          if (error) {
+            const loading = document.getElementById("loading-wager");
+            loading.innerText = "An error ocurred try refreshing";
+            loading.style.color = "red";
+          }
         },
       });
-=======
-          console.error('Error fetching data:', error)
-          if (error) {
-            const loading = document.getElementById('loading-wager')
-            loading.innerText = 'An error ocurred try refreshing'
-            loading.style.color = 'red'
-          }
-        }
-      })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
     }
     if ($("#daily-sales-chart").length) {
       var dailySalesChartData = {
@@ -577,28 +540,19 @@
     }
     function fetchShowValues() {
       $.ajax({
-<<<<<<< HEAD
-        url: "http://localhost:8000/admin/dashboard",
+        url: serverUrl + "/admin/dashboard",
         method: "GET",
         dataType: "json",
         success: function (res) {
           const data = res.data;
-          console.log(data);
-=======
-        url: serverUrl + '/admin/dashboard',
-        method: 'GET',
-        dataType: 'json',
-        success: function (res) {
-          const data = res.data
           if (data) {
-            const loadings = document.querySelectorAll('#loading')
+            const loadings = document.querySelectorAll("#loading");
 
             loadings.forEach(function (element) {
-              element.textContent = ''
-            })
+              element.textContent = "";
+            });
           }
-          console.log(data)
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
+          console.log(data);
           // Get each of the displayed elements using jQuery
           $("#total-deposited-players").text(data.totalDepositedPlayers);
           $("#total-deposited-players-type").text(
@@ -626,58 +580,38 @@
           );
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
           console.error("Error fetching data:", error);
+          const loading = document.getElementById("loading");
+          loading.innerText = "unable to load data";
+          loading.style.color = "red";
         },
       });
-=======
-          console.error('Error fetching data:', error)
-          const loading = document.getElementById('loading')
-          loading.innerText = 'unable to load data'
-          loading.style.color = 'red'
-        }
-      })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
     }
 
     // Trigger the fetchShowValues function on document ready
     fetchShowValues();
 
     $.ajax({
-<<<<<<< HEAD
-      url: "http://localhost:8000/admin/wageredranking",
+      url: serverUrl + "/admin/wageredranking",
       method: "GET",
       dataType: "json",
       success: function (res) {
         console.log(res);
+        if (res) {
+          const loading = document.getElementById("loading-wager-table");
+          loading.innerText = res.length < 1 ? "No current Wager Ranking" : "";
+        }
         renderWageredRanking(res);
       },
       error: function (xhr, status, error) {
         console.error("Error fetching data:", error);
+        if (error) {
+          const loading = document.getElementById("loading-wager-table");
+          loading.innerText = "an error ocured";
+          loading.style.color = "red";
+        }
       },
     });
-=======
-      url: serverUrl + '/admin/wageredranking',
-      method: 'GET',
-      dataType: 'json',
-      success: function (res) {
-        console.log(res)
-        if (res) {
-          const loading = document.getElementById('loading-wager-table')
-          loading.innerText = res.length < 1 ? 'No current Wager Ranking' : ''
-        }
-        renderWageredRanking(res)
-      },
-      error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-        if (error) {
-          const loading = document.getElementById('loading-wager-table')
-          loading.innerText = 'an error ocured'
-          loading.style.color = 'red'
-        }
-      }
-    })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
 
     // Function to render data in the member table
     function renderWageredRanking(data) {
@@ -688,7 +622,6 @@
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-<<<<<<< HEAD
         var row = $("<tr>");
         row.append(
           '<td class="py-1"><img src=' +
@@ -696,48 +629,9 @@
             'alt="image" /></td>'
         );
         row.append("<td>" + member.user_id + "</td>");
-        row.append("<td>" + member.lastname + " " + member.firstname + "</td>");
         row.append("<td>" + member.username + "</td>");
-        row.append("<td>" + member.email + "</td>");
-        row.append("<td>" + member.phone + "</td>");
-        row.append("<td>" + member.born + "</td>");
-        row.append("<td>" + member.next_level_point + "</td>");
-        row.append("<td>" + member.hide_profile + "</td>");
-        row.append("<td>" + member.hidden_from_public + "</td>");
-        row.append("<td>" + member.refuse_friends_request + "</td>");
-        row.append("<td>" + member.refuse_tips + "</td>");
         row.append("<td>" + member.vip_level + "</td>");
-        row.append("<td>" + member.kyc_is_activated + "</td>");
         row.append("<td>" + member.total_wagered.toFixed(2) + "</td>");
-        row.append("<td>" + member.invited_code + "</td>");
-        row.append("<td>" + member.google_auth_is_activated + "</td>");
-        row.append("<td>" + member.is_suspend + "</td>");
-        row.append("<td>" + member.vip_progress + "</td>");
-        row.append("<td>" + member.fa_is_activated + "</td>");
-        row.append("<td>" + member.earn_me.toFixed(2) + "</td>");
-        row.append("<td>" + member.commission_reward.toFixed(2) + "</td>");
-        row.append("<td>" + member.usd_reward.toFixed(2) + "</td>");
-        row.append(
-          "<td>" +
-            new Date(member.joined_at).toLocaleString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            }) +
-            "</td>"
-        );
-        row.append("<td>" + member.account_type + "</td>");
-        row.append("<td>" + member.total_chat_messages + "</td>");
-        row.append("<td>" + member.weekly_wagered + "</td>");
-        row.append("<td>" + member.monthly_wagered + "</td>");
-=======
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.username + '</td>')
-        row.append('<td>' + member.vip_level + '</td>')
-        row.append('<td>' + member.total_wagered.toFixed(2) + '</td>')
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
 
         // Append the row to the table body
         tableBody.append(row);
@@ -745,40 +639,27 @@
     }
 
     $.ajax({
-<<<<<<< HEAD
-      url: "http://localhost:8000/admin/wonranking",
+      url: serverUrl + "/admin/wonranking",
       method: "GET",
       dataType: "json",
       success: function (res) {
         console.log(res);
+        if (res) {
+          const loading = document.getElementById("loading-won-table");
+          loading.innerText =
+            res.wonRanking.length < 1 ? "No current won Ranking" : "";
+        }
         renderWonRanking(res.wonRanking);
       },
       error: function (xhr, status, error) {
         console.error("Error fetching data:", error);
+        if (error) {
+          const loading = document.getElementById("loading-won-table");
+          loading.innerText = "an error occured";
+          loading.style.color = "red";
+        }
       },
     });
-=======
-      url: serverUrl + '/admin/wonranking',
-      method: 'GET',
-      dataType: 'json',
-      success: function (res) {
-        console.log(res)
-        if (res) {
-          const loading = document.getElementById('loading-won-table')
-          loading.innerText = res.wonRanking.length < 1 ? 'No current won Ranking' : ''
-        }
-        renderWonRanking(res.wonRanking)
-      },
-      error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-        if (error) {
-          const loading = document.getElementById('loading-won-table')
-          loading.innerText = 'an error occured'
-          loading.style.color = 'red'
-        }
-      }
-    })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
 
     // Function to render data in the member table
     function renderWonRanking(data) {
@@ -789,109 +670,44 @@
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-<<<<<<< HEAD
         var row = $("<tr>");
         row.append(
           '<td class="py-1"><img src=' +
-            member.profile.profile_image +
+            member.profile?.profile_image +
             'alt="image" /></td>'
         );
         row.append("<td>" + member.user_id + "</td>");
-        row.append(
-          "<td>" +
-            member.profile.lastname +
-            " " +
-            member.profile.firstname +
-            "</td>"
-        );
-        row.append("<td>" + member.profile.username + "</td>");
-        row.append("<td>" + member.email + "</td>");
-        row.append("<td>" + member.profile.phone + "</td>");
-        row.append("<td>" + member.profile.totalWon + "</td>");
-        row.append("<td>" + member.provider + "</td>");
-        row.append("<td>" + member.emailVerified + "</td>");
-        row.append("<td>" + member.last_login_ip + "</td>");
-        row.append("<td>" + member.next_level_point + "</td>");
-        row.append("<td>" + member.profile.hide_profile + "</td>");
-        row.append("<td>" + member.profile.hidden_from_public + "</td>");
-        row.append("<td>" + member.profile.refuse_friends_request + "</td>");
-        row.append("<td>" + member.profile.refuse_tips + "</td>");
-        row.append("<td>" + member.profile.vip_level + "</td>");
-        row.append("<td>" + member.profile.kyc_is_activated + "</td>");
-        row.append("<td>" + member.profile.total_wagered.toFixed(2) + "</td>");
-        row.append("<td>" + member.profile.invited_code + "</td>");
-        row.append("<td>" + member.profile.google_auth_is_activated + "</td>");
-        row.append("<td>" + member.profile.is_suspend + "</td>");
-        row.append("<td>" + member.profile.vip_progress + "</td>");
-        row.append("<td>" + member.profile.fa_is_activated + "</td>");
-        row.append("<td>" + member.profile.earn_me.toFixed(2) + "</td>");
-        row.append(
-          "<td>" + member.profile.commission_reward.toFixed(2) + "</td>"
-        );
-        row.append("<td>" + member.profile.usd_reward.toFixed(2) + "</td>");
-        row.append(
-          "<td>" +
-            new Date(member.profile.joined_at).toLocaleString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            }) +
-            "</td>"
-        );
-        row.append("<td>" + member.profile.account_type + "</td>");
-        row.append("<td>" + member.profile.total_chat_messages + "</td>");
-        row.append("<td>" + member.profile.weekly_wagered + "</td>");
-        row.append("<td>" + member.profile.monthly_wagered + "</td>");
-        row.append("<td>" + member.monthly_wagered + "</td>");
-=======
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile?.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile?.username + '</td>')
-        row.append('<td>' + member.totalWon.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile?.vip_level + '</td>')
-        row.append('<td>' + member.profile?.total_wagered.toFixed(2) + '</td>')
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
+        row.append("<td>" + member.profile?.username + "</td>");
+        row.append("<td>" + member.totalWon.toFixed(2) + "</td>");
+        row.append("<td>" + member.profile?.vip_level + "</td>");
+        row.append("<td>" + member.profile?.total_wagered.toFixed(2) + "</td>");
 
         // Append the row to the table body
         tableBody.append(row);
       });
     }
     $.ajax({
-<<<<<<< HEAD
-      url: "http://localhost:8000/admin/lossranking",
+      url: serverUrl + "/admin/lossranking",
       method: "GET",
       dataType: "json",
       success: function (res) {
         console.log(res);
+        if (res) {
+          const loading = document.getElementById("loading-loss-table");
+          loading.innerText =
+            res.lossRanking.length < 1 ? "No current loss Ranking" : "";
+        }
         renderLossRanking(res.lossRanking);
       },
       error: function (xhr, status, error) {
         console.error("Error fetching data:", error);
+        if (error) {
+          const loading = document.getElementById("loading-loss-table");
+          loading.innerText = " an error ocurred";
+          loading.style.color = "red";
+        }
       },
     });
-=======
-      url: serverUrl + '/admin/lossranking',
-      method: 'GET',
-      dataType: 'json',
-      success: function (res) {
-        console.log(res)
-        if (res) {
-          const loading = document.getElementById('loading-loss-table')
-          loading.innerText = res.lossRanking.length < 1 ? 'No current loss Ranking' : ''
-        }
-        renderLossRanking(res.lossRanking)
-      },
-      error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-        if (error) {
-          const loading = document.getElementById('loading-loss-table')
-          loading.innerText = ' an error ocurred'
-          loading.style.color = 'red'
-        }
-      }
-    })
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
 
     // Function to render data in the member table
     function renderLossRanking(data) {
@@ -902,69 +718,17 @@
 
       // Iterate over each member data and append a new row
       $.each(data, function (index, member) {
-<<<<<<< HEAD
         var row = $("<tr>");
         row.append(
           '<td class="py-1"><img src=' +
-            member.profile.profile_image +
+            member.profile?.profile_image +
             'alt="image" /></td>'
         );
         row.append("<td>" + member.user_id + "</td>");
-        row.append(
-          "<td>" +
-            member.profile.lastname +
-            " " +
-            member.profile.firstname +
-            "</td>"
-        );
-        row.append("<td>" + member.profile.username + "</td>");
-        row.append("<td>" + member.email + "</td>");
-        row.append("<td>" + member.profile.phone + "</td>");
-        row.append("<td>" + member.profile.totalLoss + "</td>");
-        row.append("<td>" + member.provider + "</td>");
-        row.append("<td>" + member.emailVerified + "</td>");
-        row.append("<td>" + member.last_login_ip + "</td>");
-        row.append("<td>" + member.next_level_point + "</td>");
-        row.append("<td>" + member.profile.hide_profile + "</td>");
-        row.append("<td>" + member.profile.hidden_from_public + "</td>");
-        row.append("<td>" + member.profile.refuse_friends_request + "</td>");
-        row.append("<td>" + member.profile.refuse_tips + "</td>");
-        row.append("<td>" + member.profile.vip_level + "</td>");
-        row.append("<td>" + member.profile.kyc_is_activated + "</td>");
-        row.append("<td>" + member.profile.total_wagered.toFixed(2) + "</td>");
-        row.append("<td>" + member.profile.invited_code + "</td>");
-        row.append("<td>" + member.profile.google_auth_is_activated + "</td>");
-        row.append("<td>" + member.profile.is_suspend + "</td>");
-        row.append("<td>" + member.profile.vip_progress + "</td>");
-        row.append("<td>" + member.profile.fa_is_activated + "</td>");
-        row.append("<td>" + member.profile.earn_me.toFixed(2) + "</td>");
-        row.append(
-          "<td>" + member.profile.commission_reward.toFixed(2) + "</td>"
-        );
-        row.append("<td>" + member.profile.usd_reward.toFixed(2) + "</td>");
-        row.append(
-          "<td>" +
-            new Date(member.profile.joined_at).toLocaleString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            }) +
-            "</td>"
-        );
-        row.append("<td>" + member.profile.account_type + "</td>");
-        row.append("<td>" + member.profile.total_chat_messages + "</td>");
-        row.append("<td>" + member.profile.weekly_wagered + "</td>");
-        row.append("<td>" + member.profile.monthly_wagered + "</td>");
-        row.append("<td>" + member.monthly_wagered + "</td>");
-=======
-        var row = $('<tr>')
-        row.append('<td class="py-1"><img src=' + member.profile?.profile_image + 'alt="image" /></td>')
-        row.append('<td>' + member.user_id + '</td>')
-        row.append('<td>' + member.profile?.username + '</td>')
-        row.append('<td>' + member.totalLoss.toFixed(2) + '</td>')
-        row.append('<td>' + member.profile?.vip_level + '</td>')
-        row.append('<td>' + member.profile?.total_wagered.toFixed(2) + '</td>')
->>>>>>> 19aa0946f511162d59721b731906c6dd1d11dcae
+        row.append("<td>" + member.profile?.username + "</td>");
+        row.append("<td>" + member.totalLoss.toFixed(2) + "</td>");
+        row.append("<td>" + member.profile?.vip_level + "</td>");
+        row.append("<td>" + member.profile?.total_wagered.toFixed(2) + "</td>");
 
         // Append the row to the table body
         tableBody.append(row);
