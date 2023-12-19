@@ -8,18 +8,21 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
+    <title>Dot Play Play </title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
+        <link rel="shortcut icon" href="../../images/favicon.ico" />
+
     <!-- inject:css -->
     <link rel="stylesheet" href="../../css/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <link rel="shortcut icon"
+        href="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png" />
     <!-- Include the Firebase SDK -->
     <script type="module" src='https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js'></script>
     <script type="module" src='https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js'></script>
@@ -33,7 +36,7 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo" href="index.html"><img
-                        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1701944605/dpp-favicon-logo-allwhite-transparent-final_jsl2ko.png"
+                        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848521/dpp-logowhite_lbifm7.png"
                         alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img
                         src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png"
@@ -761,15 +764,20 @@
                     </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="../memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
+              <i class="fa-solid fa-users-gear menu-icon"></i>
                             <span class="menu-title">Member Management</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../chatManagement/chatManagement.html">
+              <i class="far fa-regular fa-message menu-icon"></i>
+                            <span class="menu-title">Chat Management</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                             aria-controls="page-layouts">
-                            <i class="fab fa-trello menu-icon"></i>
+              <i class="fa-solid fa-table menu-icon"></i>
                             <span class="menu-title">Report</span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -777,52 +785,23 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item d-none d-lg-block"> <a class="nav-link"
                                         href="../report/dailyStats.html">Daily
-                                        statistic report</a></li>
+                                        Statistic Report</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="../report/gamereport.html">Game
-                                        report</a></li>
+                                        Report</a></li>
                                 <li class="nav-item d-none d-lg-block"> <a class="nav-link"
-                                        href="../report/GGRMember.html">GGR report
-                                        by member</a></li>
+                                        href="../report/GGRMember.html">GGR Report
+                                        By Member</a></li>
                                 <li class="nav-item d-none d-lg-block"> <a class="nav-link"
                                         href="../report/promotionReport.html">Promotion
                                         Report</a></li>
                                 <li class="nav-item d-none d-lg-block"> <a class="nav-link"
                                         href="../report/memberBalance.html">Member
-                                        Balance report</a></li>
+                                        Balance Report</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
-                            <span class="menu-title">Admin Settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
-                            <span class="menu-title">Referral settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
-                            <span class="menu-title">CMS settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
-                            <span class="menu-title">Transactions</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/memberManagement.html">
-                            <i class="far fa-file-alt menu-icon"></i>
-                            <span class="menu-title">settings</span>
-                        </a>
-                    </li>
+                     
                 </ul>
             </nav>
             <!-- partial -->
@@ -835,53 +814,98 @@
                             Daily Statistics Report
                         </h3>
 
-                        <nav aria-label="breadcrumb">
+                        <!-- <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Tables</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Data table</li>
                             </ol>
-                        </nav>
+                        </nav> -->
                     </div>
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                            <h4 class="card-title">Daily Report</h4>
-                            <div class="row">
-                                <div class="" style="width: 100%;">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Field
-                                                    </th>
-                                                    <th>
-                                                        Value
-                                                    </th>
-                                                  
-                                                </tr>
-                                            </thead>
-                                            <tbody id='daily-report-table'>
-                
-                
-                                            </tbody>
-                                        </table>
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <h4 class="card-title">Daily Report</h4> -->
+                                <div class="row">
+                                    <div class="" style="width: 100%;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped" style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Date
+                                                        </th>
+                                                        <th>
+                                                            DAU (Count)
+                                                        </th>
+                                                        <th>
+                                                            Total New Purchase (count)
+                                                        </th>
+                                                        <th>
+                                                            Total New Purchase ($)
+                                                        </th>
+                                                        <th>
+                                                            Total New Upgrade ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Cash Inflow ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Member Balance ($)
+                                                        </th>
+                                                        <th>
+                                                            Total DMF ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Wagered ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Winning Payouts ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Claim
+                                                        </th>
+                                                        <th>
+                                                            Total Net Payouts ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Referral Bonus ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Attendance Bonus ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Ranking Bonus ($)
+                                                        </th>
+                                                        <th>
+                                                            Total Same Level Bonus ($)
+                                                        </th>
+                                                        <th>
+                                                            Total P2E Loss
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id='daily-report-table'>
+                                                    <!-- <p id="loading-daily">loading</p> -->
+
+                                                </tbody>
+                                            </table>
+                                            <p id="loading-daily-report" style="text-align: center;margin-top: 20px;">loading
+                                            </p>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- content-wrapper ends -->
                     <!-- partial:../partials/_footer.html -->
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018
-                                <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023
+                                <a href="/" target="_blank">DotPlayPlay</a>. All rights
                                 reserved.</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
-                                with <i class="far fa-heart text-danger"></i></span>
-                        </div>
+                                           </div>
                     </footer>
                     <!-- partial -->
                 </div>
@@ -900,6 +924,8 @@
         <script src="../../js/misc.js"></script>
         <script src="../../js/settings.js"></script>
         <script src="../../js/todolist.js"></script>
+        <script src="../../js/config.js"></script>
+
         <!-- endinject -->
         <!-- Custom js for this page-->
         <script src="../../js/data-table.js"></script>

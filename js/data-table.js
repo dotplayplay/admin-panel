@@ -1,6 +1,7 @@
 ;(function ($) {
   'use strict'
   $(function () {
+    console.log(serverUrl)
     $('#order-listing').DataTable({
       aLengthMenu: [
         [5, 10, 15, -1],
@@ -38,68 +39,71 @@
 
     // Fetch data from the server with the actual endpoint)
     $.ajax({
-      url: 'http://localhost:8000/admin/members',
+      url: serverUrl + '/admin/members',
       method: 'GET',
       dataType: 'json',
       success: function (res) {
+        const newData = res.data
+        if (newData) {
+          const loading = document.getElementById('loading-member-table')
+          loading.innerText = newData < 1 ? 'No current loss Ranking' : ''
+        }
         console.log(res.data)
-        renderMemberTable(res.data)
+        var tableBody = $('#member-table-body')
+        tableBody.empty()
+        // Clear existing data in the table
+
+        // Iterate over each member data and append a new row
+        $.each(newData, function (index, member) {
+          let row = $('<tr>')
+          row.append(
+            '<td><a href="' +
+              'http://127.0.0.1:5500/administration/pages/profile/profile.html?id=' +
+              member.user_id +
+              '" target="_blank">' +
+              member.user_id +
+              '</a></td>'
+          )
+          row.append('<td>' + member.profile?.username + '</td>')
+          row.append('<td>' + member.profile?.invited_code + '</td>')
+          row.append('<td>' + member.profile?.lastname + ' ' + member.profile?.firstname + '</td>')
+          row.append('<td>' + member.profile?.phone + '</td>')
+          row.append('<td>' + member.email + '</td>')
+          row.append('<td>' + member.profile?.total_wagered + '</td>')
+          row.append('<td>' + member.ggr + '</td>')
+          row.append('<td>' + member.profile?.total_chat_messages + '</td>')
+          row.append('<td>' + member.totalBalance + '</td>')
+          row.append('<td>' + member.bankInfo + '</td>')
+          row.append(
+            '<td>' +
+              new Date(member.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
+              '</td>'
+          )
+          row.append('<td>' + member.userFirstAndLastDeposit.first_deposit + '</td>')
+          row.append('<td>' + member.userFirstAndLastDeposit.last_deposit + '</td>')
+          row.append(
+            '<td>' +
+              new Date(member.lastLoginAt).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
+              '</td>'
+          )
+          row.append('<td>' + member.last_login_ip + '</td>')
+          row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
+          row.append(
+            '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
+          )
+
+          // Append the row to the table body
+          tableBody.append(row)
+        })
       },
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
+        const loading = document.getElementById('loading-member-table')
+        console.log('load gotten')
+        loading.innerText = 'an error ocured'
+        loading.style.color = 'red'
       }
     })
-
-    // Function to render data in the member table
-    function renderMemberTable(data) {
-      var tableBody = $('#member-table-body')
-
-      // Clear existing data in the table
-      tableBody.empty()
-
-      // Iterate over each member data and append a new row
-      $.each(data, function (index, member) {
-        var row = $('<tr>')
-        row.append(
-          '<td><a href="' +
-            'http://localhost:8000/admin/member/' +
-            member.user_id +
-            '" target="_blank">' +
-            member.user_id +
-            '</a></td>'
-        )
-        row.append('<td>' + member.profile.username + '</td>')
-        row.append('<td>' + member.profile.invited_code + '</td>')
-        row.append('<td>' + member.profile.lastname + ' ' + member.profile.firstname + '</td>')
-        row.append('<td>' + member.profile.phone + '</td>')
-        row.append('<td>' + member.email + '</td>')
-        row.append('<td>' + member.profile.total_wagered + '</td>')
-        row.append('<td>' + member.ggr + '</td>')
-        row.append('<td>' + member.profile.total_chat_messages + '</td>')
-        row.append('<td>' + member.totalBalance + '</td>')
-        row.append('<td>' + member.bankInfo + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.userFirstAndLastDeposit.first_deposit + '</td>')
-        row.append('<td>' + member.userFirstAndLastDeposit.last_deposit + '</td>')
-        row.append(
-          '<td>' +
-            new Date(member.lastLoginAt).toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) +
-            '</td>'
-        )
-        row.append('<td>' + member.last_login_ip + '</td>')
-        row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
-        row.append(
-          '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
-        )
-
-        // Append the row to the table body
-        tableBody.append(row)
-      })
-    }
 
     // Toggle options on icon click
     $('.icon').click(function () {
@@ -115,130 +119,201 @@
         $('.options').hide()
       }
     })
-    reportTables('http://localhost:8000/admin/gamereport', '#game-report-table')
-    reportTables('http://localhost:8000/admin/report', '#daily-report-table')
-    function reportTables(url, id) {
-      $.ajax({
-        url: url,
-        method: 'GET',
-        dataType: 'json',
-        success: function (res) {
-          console.log(res)
-
-          const tbody = $(id)
-
-          function appendDataToTable(data, prefix = '') {
-            $.each(data, function (key, value) {
-              if (typeof value === 'object' && value !== null) {
-                appendDataToTable(value, key + '_')
-              } else {
-                const row = $('<tr>')
-                row.append($('<td>').text(prefix + key))
-                row.append($('<td>').text(value))
-                tbody.append(row)
-              }
-            })
-          }
-
-          appendDataToTable(res)
-        },
-        error: function (xhr, status, error) {
-          console.error('Error fetching data:', error)
+    // reportTables(serverUrl + '/admin/gamereport', '#game-report-table')
+    // reportTables(serverUrl + '/admin/report', '#daily-report-table')
+    $.ajax({
+      url: serverUrl + '/admin/report',
+      method: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        if (res) {
+          const loading = document.getElementById('loading-daily-report')
+          loading.innerText = ''
         }
+        var tableBody = $('#daily-report-table')
+
+        // Clear existing data in the table
+        tableBody.empty()
+
+        // Iterate over each member data and append a new row
+        $.each(res, function (index, member) {
+          var row = $('<tr>')
+          row.append('<td>' + member.date + '</td>')
+          row.append('<td>' + member.dauCount + '</td>')
+          row.append('<td>' + member.totalWagered + '</td>')
+          row.append('<td>' + member.totalPayout + '</td>')
+          row.append('<td>' + member.ggr + '</td>')
+
+          // Append the row to the table body
+          tableBody.append(row)
+        })
+      },
+
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error)
+        const loading = document.getElementById('loading-daily-report')
+        loading.innerText = ' an error ocurred'
+        loading.style.color = 'red'
+      }
+    })
+    // $.ajax({
+    //   url: serverUrl + '/admin/gamereport',
+    //   method: 'GET',
+    //   dataType: 'json',
+    //   success: function (res) {
+    //     console.log(res)
+    //     if (res.data) {
+    //       const loading = document.getElementById('loading-daily')
+    //       loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
+    //     }
+    //     var tableBody = $('#game-report-table')
+
+    //     // Clear existing data in the table
+    //     tableBody.empty()
+
+    //     // Iterate over each member data and append a new row
+    //     $.each(res.data, function (index, member) {
+    //       var row = $('<tr>')
+    //       row.append('<td>' + member.user_id + '</td>')
+    //       row.append('<td>' + member.username + '</td>')
+    //       row.append('<td>' + member.totalWagered + '</td>')
+    //       row.append('<td>' + member.totalPayout + '</td>')
+    //       row.append('<td>' + member.ggr + '</td>')
+
+    //       // Append the row to the table body
+    //       tableBody.append(row)
+    //     })
+    //   },
+
+    //   error: function (xhr, status, error) {
+    //     console.error('Error fetching data:', error)
+    //     const loading = document.getElementById('loading-daily')
+    //     loading.innerText = ' an error ocurred'
+    //     loading.style.color = 'red'
+    //   }
+    // })
+    $.ajax({
+      url: serverUrl + '/admin/gamereport',
+      method: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        if (res) {
+          const loading = document.getElementById('loading-daily-game')
+          loading.innerText = ''
+        }
+        const allHead = $('#all-head')
+        const wagerHead = $('#daily-total-wagered')
+        const payoutHead = $('#daily-payout')
+        const ggrHead = $('#daily-ggr')
+        const percentageHead = $('#daily-percentage')
+        const betHead = $('#bet-count')
+        const playerHead = $('#Player-count')
+        // console.log(playerHead, betHead, percentageHead, ggrHead, payoutHead, wagerHead, allHead)
+        // Clear existing data in the table
+        // tableBody.empty()
+
+        // Iterate over each member data and append a new row
+        // $.each(res.data, function (index, member) {
+        const headrow = $('<tr>')
+        headrow.append('<td>' + res.success + '</td>')
+        console.log('head done ')
+        // Append the row to the table body
+        allHead.append(headrow)
+        // })
+        const wagerRow = $('<tr>')
+        wagerRow.append('<td>' + res.totalWagered?.crashDailyTotalWagered + '</td>')
+        wagerRow.append('<td>' + res.totalWagered?.diceDailyTotalWagered + '</td>')
+        wagerRow.append('<td>' + res.totalWagered?.minesDailyTotalWagered + '</td>')
+        console.log(res.totalWagered?.crashDailyTotalWagered)
+
+        // Append the row to the table body
+        wagerHead.append(wagerRow)
+        const payoutRow = $('<tr>')
+        payoutRow.append('<td>' + res.totalPayout?.crashDailyPayout + '</td>')
+        payoutRow.append('<td>' + res.totalPayout?.diceDailyPayout + '</td>')
+        payoutRow.append('<td>' + res.totalPayout?.minesDailyPayout + '</td>')
+
+        // Append the row to the table body
+        payoutHead.append(payoutRow)
+        const ggrRow = $('<tr>')
+        ggrRow.append('<td>' + res.totalGGR?.crashDailyGGR + '</td>')
+        ggrRow.append('<td>' + res.totalGGR?.diceDailyGGR + '</td>')
+        ggrRow.append('<td>' + res.totalGGR?.minesDailyGGR + '</td>')
+
+        // Append the row to the table body
+        ggrHead.append(ggrRow)
+        const percentageRow = $('<tr>')
+        percentageRow.append('<td>' + res.totalGGRPercentage?.minesDailyGGR + '</td>')
+        percentageRow.append('<td>' + res.totalGGRPercentage?.minesDailyGGR + '</td>')
+        percentageRow.append('<td>' + res.totalGGRPercentage?.minesDailyGGR + '</td>')
+
+        // Append the row to the table body
+        percentageHead.append(percentageRow)
+        const betRow = $('<tr>')
+        betRow.append('<td>' + res.totalBetCount?.crashBetCount + '</td>')
+        betRow.append('<td>' + res.totalBetCount?.diceBetCount + '</td>')
+        betRow.append('<td>' + res.totalBetCount?.minesBetCount + '</td>')
+
+        // Append the row to the table body
+        betHead.append(betRow)
+        const PlayerRow = $('<tr>')
+        PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>')
+        PlayerRow.append('<td>' + res.totalPlayerCount?.dicePlayerCount + '</td>')
+        PlayerRow.append('<td>' + res.totalPlayerCount?.minesPlayerCount + '</td>')
+        // console.log(PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>'))
+
+        // Append the row to the table body
+        playerHead.append(PlayerRow)
+      },
+
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error)
+        const loading = document.getElementById('loading-daily-game')
+        loading.innerText = ' an error ocurred'
+        loading.style.color = 'red'
+      }
+    })
+    $.ajax({
+      url: serverUrl + '/admin/ggrreport',
+      method: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        if (res.data) {
+          const loading = document.getElementById('loading-ggr')
+          loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
+        }
+        renderGgrRanking(res.data)
+      },
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error)
+        const loading = document.getElementById('loading-ggr')
+        loading.innerText = ' an error ocurred'
+        loading.style.color = 'red'
+      }
+    })
+
+    // Function to render data in the member table
+    function renderGgrRanking(data) {
+      var tableBody = $('#ggr-report-table')
+
+      // Clear existing data in the table
+      tableBody.empty()
+
+      // Iterate over each member data and append a new row
+      $.each(data, function (index, member) {
+        var row = $('<tr>')
+        row.append('<td>' + member.user_id + '</td>')
+        row.append('<td>' + member.username + '</td>')
+        row.append('<td>' + member.totalWagered + '</td>')
+        row.append('<td>' + member.totalPayout + '</td>')
+        row.append('<td>' + member.ggr + '</td>')
+
+        // Append the row to the table body
+        tableBody.append(row)
       })
     }
-    // jQuery event handler for signup button click
-    // $('#signupForm').submit('click', function (e) {
-    //   e.preventDefault()
-    //   //  Firebase configuration
-    //   const firebaseConfig = {
-    //     apiKey: 'AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ',
-    //     authDomain: 'dotplayplay-1692584380329.firebaseapp.com',
-    //     projectId: 'dotplayplay-1692584380329',
-    //     storageBucket: 'dotplayplay-1692584380329.appspot.com',
-    //     messagingSenderId: '934101502841',
-    //     appId: '1:934101502841:web:7c618c3beffda794a3bda8'
-    //   }
-
-    //   // Initialize Firebase
-    //   const app = firebase.initializeApp(firebaseConfig)
-
-    //   // Initialize Firebase Authentication
-    //   const auth = firebase.auth(app)
-
-    //   const email = $('#email').val()
-    //   const password = $('#password').val()
-
-    //   // Create user with email and password using Firebase
-    //   auth
-    //     .createUserWithEmailAndPassword(email, password)
-    //     .then(userCredential => {
-    //       // User signed up successfully
-    //       const userId = userCredential.user.uid
-    //       console.log('User signed up. UserID:', userId)
-
-    //       // Add user ID to the form data
-    //       $('#signupForm').append('<input type="hidden" name="user_id" value="' + userId + '">')
-
-    //       // Collect all form data
-    //       var formData = $('#signupForm').serialize()
-    //       console.log(formData)
-
-    //       // Send complete data to the second server
-    //       $.ajax({
-    //         url: 'http://localhost:8000/admin/create', // Replace with your actual second server endpoint
-    //         method: 'POST',
-    //         data: formData,
-    //         success: function (secondServerResponse) {
-    //           console.log('User created successfully:', secondServerResponse)
-    //           // Add any additional logic or UI updates here
-    //         },
-    //         error: function (xhr, status, error) {
-    //           console.error('Error sending data to the second server:', error)
-    //           // Handle errors or display error messages
-    //         }
-    //       })
-    //     })
-    //     .catch(error => {
-    //       // Handle errors
-    //       const errorCode = error.code
-    //       const errorMessage = error.message
-    //       console.error('Error signing up:', errorCode, errorMessage)
-    //     })
-    // })
   })
 })(jQuery)
-
-// import { initializeApp } from 'firebase/app'
-// import { getAuth } from 'firebase/auth'
-
-// // TODO: Replace the following with your app's Firebase project configuration
-// // See: https://firebase.google.com/docs/web/learn-more#config-object
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ',
-//   authDomain: 'dotplayplay-1692584380329.firebaseapp.com',
-//   projectId: 'dotplayplay-1692584380329',
-//   storageBucket: 'dotplayplay-1692584380329.appspot.com',
-//   messagingSenderId: '934101502841',
-//   appId: '1:934101502841:web:7c618c3beffda794a3bda8'
-// }
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig)
-
-// // Initialize Firebase Authentication and get a reference to the service
-// const auth = getAuth(app)
-
-// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
-// createUserWithEmailAndPassword(auth, email, password)
-//   .then(userCredential => {
-//     // Signed up
-//     const userId = userCredential.user.uid
-//     // ...
-//   })
-//   .catch(error => {
-//     const errorCode = error.code
-//     const errorMessage = error.message
-//     // ..
-//   })
