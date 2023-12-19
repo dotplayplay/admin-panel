@@ -850,9 +850,14 @@
                                                         name="confirm_password" type="password" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="firstname">Referral Code </label>
-                                                    <input id="referal" class="form-control" name="referral"
+                                                    <label for="invited_code">Invited Code </label>
+                                                    <input id="invited_code" class="form-control" name="invited_code"
                                                         type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vipLevel">Vip Level  </label>
+                                                    <input id="vipLevel" class="form-control" name="vipLevel"
+                                                        type="number" value="0">
                                                 </div>
                                                 <input class="btn btn-primary" type="submit" id="create-user"
                                                     value="Submit">
@@ -1202,142 +1207,147 @@
         };
     </script> -->
     <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-  import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-  // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ",
-    authDomain: "dotplayplay-1692584380329.firebaseapp.com",
-    projectId: "dotplayplay-1692584380329",
-    storageBucket: "dotplayplay-1692584380329.appspot.com",
-    messagingSenderId: "934101502841",
-    appId: "1:934101502841:web:7c618c3beffda794a3bda8"
-  };
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzTvAEBt59YRXXHcddEN-jPCpYL17zYRQ",
+            authDomain: "dotplayplay-1692584380329.firebaseapp.com",
+            projectId: "dotplayplay-1692584380329",
+            storageBucket: "dotplayplay-1692584380329.appspot.com",
+            messagingSenderId: "934101502841",
+            appId: "1:934101502841:web:7c618c3beffda794a3bda8"
+        };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
 
-  // Initialize Firebase Authentication
-  const auth = getAuth(app);
-  //console.log(auth);
+        // Initialize Firebase Authentication
+        const auth = getAuth(app);
+        //console.log(auth);
 
-  // Custom email validation method
-  $.validator.addMethod("strictEmail", function(value, element) {
-    // Use a regular expression for stricter email validation
-    return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
-  }, "Please enter a valid email address.");
+        // Custom email validation method
+        $.validator.addMethod("strictEmail", function (value, element) {
+            // Use a regular expression for stricter email validation
+            return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+        }, "Please enter a valid email address.");
 
-  // Function to validate form and handle Firebase authentication
-  function validateAndCreateUser() {
-    // Add validation rules using jQuery Validate plugin
-    $("#signupForm").validate({
-      rules: {
-        username: "required",
-        phoneNumber: "required",
-        email: {
-          required: true,
-          strictEmail: true  // Use the custom strictEmail method
-        },
-        password: {
-          required: true,
-          minlength: 5
-        },
-        confirm_password: {
-          required: true,
-          minlength: 5,
-          equalTo: "#password"
-        },
-        referral: "required"
-      },
-      messages: {
-        username: "Please enter your username",
-        phoneNumber: "Please enter your phone number",
-        email: {
-          required: "Please enter your email address",
-          strictEmail: "Please enter a valid email address"
-        },
-        password: {
-          required: "Please provide a password",
-          minlength: "Your password must be at least 5 characters long"
-        },
-        confirm_password: {
-          required: "Please provide a password",
-          minlength: "Your password must be at least 5 characters long",
-          equalTo: "Please enter the same password as above"
-        },
-        referral: "Please enter your referral code"
-      },
-      submitHandler: function (form) {
-        // Form is valid, proceed with Firebase authentication
-        const email = $("#email").val();
-        const password = $("#password").val();
+        // Function to validate form and handle Firebase authentication
+        function validateAndCreateUser() {
+            // Add validation rules using jQuery Validate plugin
+            $("#signupForm").validate({
+                rules: {
+                    username: "required",
+                    phoneNumber: "required",
+                    email: {
+                        required: true,
+                        strictEmail: true  // Use the custom strictEmail method
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    confirm_password: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#password"
+                    },
+                    invited_code: "required",
+                    vipLevel: "required"
+                },
+                messages: {
+                    username: "Please enter your username",
+                    phoneNumber: "Please enter your phone number",
+                    email: {
+                        required: "Please enter your email address",
+                        strictEmail: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    confirm_password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long",
+                        equalTo: "Please enter the same password as above"
+                    },
+                    invited_code: "Please enter your invited code",
+                    vipLevel: "Please enter vip Level"
+                },
+                submitHandler: function (form) {
+                    // Form is valid, proceed with Firebase authentication
+                    const email = $("#email").val();
+                    const password = $("#password").val();
 
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(userCredential => {
-            // User signed up successfully
-            const user_id = userCredential.user.uid;
-            //console.log('User signed up. UserID:', user_id);
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then(userCredential => {
+                            // User signed up successfully
+                            const user_id = userCredential.user.uid;
+                            //console.log('User signed up. UserID:', user_id);
 
-            // Collect all form data
-            const formData = {
-              email,
-              password,
-              username: $("#username").val(),
-              phoneNumber: $("#phoneNumber").val(),
-              comfirmPassword: $("#confirm_password").val(),
-              referral: $("#referal").val(),
-              user_id
-            };
+                            // Collect all form data
+                            const formData = {
+                                email,
+                                password,
+                                username: $("#username").val(),
+                                phoneNumber: $("#phoneNumber").val(),
+                                comfirmPassword: $("#confirm_password").val(),
+                                invited_code: $("#invited_code").val(),
+                                user_id, vipLevel: $("#vipLevel").val(),
+                            };
 
-            //console.log(formData);
+                            //console.log(formData);
 
-            // Send complete data to the second server
-            fetch(serverUrl+'/admin/create', {
-              method: 'POST',
-              body: JSON.stringify(formData),
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-              .then(response => response.json())
-              .then(secondServerResponse => {
-                //console.log('User created successfully:', secondServerResponse);
-                // Add any additional logic or UI updates here
-              })
-              .catch(error => {
-                console.error('Error sending data to the second server:', error);
-                // Handle errors or display error messages
-              });
+                            // Send complete data to the second server
+                            fetch(serverUrl + '/admin/create', {
+                                method: 'POST',
+                                body: JSON.stringify(formData),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(secondServerResponse => {
+                                    //console.log('User created successfully:', secondServerResponse);
+                                     $("#signupForm")[0].reset();
+                                    // Add any additional logic or UI updates here
+                                })
+                                .catch(error => {
+                                    console.error('Error sending data to the second server:', error);
+                                    // Handle errors or display error messages
+                                });
 
-            $("#message").text('User created successfully');
-          })
-          .catch(error => {
-            // Handle errors
-            const errorCode = error.code;
-            const errorMessage = error.message;
-             //console.log(error)
-            console.error('Error signing up:', errorMessage);
-            if(errorMessage=='Firebase: Error (auth/email-already-in-use).'){
-                //console.log('hi')
-                $("#message").text('Email already in use').css('color', 'red');
-            }
-            else{
+                            $("#message").text('User created successfully');
+                          
 
-                $("#message").text('An error occurred in creating user, kindly try again').css('color', 'red');
-            } 
-          });
-      }
-    });
-  }
+                        })
+                        .catch(error => {
+                            // Handle errors
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            //console.log(error)
+                            console.error('Error signing up:', errorMessage);
+                            if (errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
+                                //console.log('hi')
+                                $("#message").text('Email already in use').css('color', 'red');
+                            }
+                            else {
 
-  // Call the validation function when the document is ready
-  $(document).ready(function () {
-    validateAndCreateUser();
+                                $("#message").text('An error occurred in creating user, kindly try again').css('color', 'red');
+                            }
+                        });
+                }
+            });
+        }
 
-    // Other code as needed...
-  });
-</script>
+        // Call the validation function when the document is ready
+        $(document).ready(function () {
+            validateAndCreateUser();
+
+            // Other code as needed...
+        });
+    </script>
 
 </body>
 
