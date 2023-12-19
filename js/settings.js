@@ -24,7 +24,7 @@
       $body.addClass('sidebar-light')
       $('.sidebar-bg-options').removeClass('selected')
       $('#logo-head').text('dotplayplay')
-      $('.brand-logo').css('display', 'none')
+      $('.large-brand-logo').css('display', 'none')
       $(this).addClass('selected')
     })
     $('#sidebar-dark-theme').on('click', function () {
@@ -32,7 +32,7 @@
       $body.addClass('sidebar-dark')
       $('.sidebar-bg-options').removeClass('selected')
       $('#logo-head').text('')
-      $('.brand-logo').css('display', 'block')
+      $('.large-brand-logo').css('display', 'block')
       $(this).addClass('selected')
     })
 
