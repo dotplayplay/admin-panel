@@ -505,21 +505,21 @@
           }
           console.log(data)
           // Get each of the displayed elements using jQuery
-          $('#total-deposited-players').text(data.totalDepositedPlayers)
+          $('#total-deposited-players').text('$' + parseInt(data.totalDepositedPlayers).toFixed(4))
           $('#total-deposited-players-type').text(
             `${data.totalDepositedPlayers.percent} ${data.totalDepositedPlayers.type}`
           )
-          $('#total-gross-gaming-revenue').text(data.grossGamingRevenue)
+          $('#total-gross-gaming-revenue').text('$' + parseInt(data.grossGamingRevenue).toFixed(4))
           $('#total-gross-gaming-revenue-type').text(
             `${data.grossGamingRevenue.percent} ${data.grossGamingRevenue.type}`
           )
-          $('#total-player-balance').text(data.totalPlayerBalance)
+          $('#total-player-balance').text('$' + parseInt(data.totalPlayerBalance).toFixed(4))
           $('#total-player-balance-type').text(`${data.totalPlayerBalance.percent} ${data.totalPlayerBalance.type}`)
-          $('#total-wagered-ranking').text(data.totalWagered)
+          $('#total-wagered-ranking').text('$' + parseInt(data.totalWagered).toFixed(4))
           $('#total-wagered-ranking-type').text(`${data.totalWagered.percent} ${data.totalWagered.type}`)
-          $('#total-win-ranking').text(data.totalWon)
+          $('#total-win-ranking').text('$' + parseInt(data.totalWon).toFixed(4))
           $('#total-win-ranking-type').text(`${data.totalWon.percent} ${data.totalWon.type}`)
-          $('#total-lose-ranking').text(data.totalLoss)
+          $('#total-lose-ranking').text('$' + parseInt(data.totalLoss).toFixed(4))
           $('#total-lose-ranking-type').text(`${data.totalLoss.percent} ${data.totalLoss.type}`)
         },
         error: function (xhr, status, error) {

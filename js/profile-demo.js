@@ -7,6 +7,10 @@
     })
     var urlParams = new URLSearchParams(window.location.search)
     var userId = urlParams.get('id')
+    if (!userId) {
+      // Redirect the user to another page (e.g., index.html)
+      window.location.href = '/administration/pages/memberManagement.html'
+    }
     console.log(userId)
     $.ajax({
       url: serverUrl + '/admin/member/' + userId,
@@ -58,9 +62,7 @@
 
       error: function (xhr, status, error) {
         console.error('Error fetching data:', error)
-        // const loading = document.getElementById('loading-daily-game')
-        // loading.innerText = ' an error ocurred'
-        // loading.style.color = 'red'
+        window.location.href = '/administration/pages/memberManagement.html'
       }
     })
   })
