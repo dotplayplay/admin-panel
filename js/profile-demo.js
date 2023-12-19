@@ -11,13 +11,13 @@
       // Redirect the user to another page (e.g., index.html)
       window.location.href = '/administration/pages/memberManagement.html'
     }
-    console.log(userId)
+    //console.log(userId)
     $.ajax({
       url: serverUrl + '/admin/member/' + userId,
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        //console.log(res)
 
         $('#phone').text(res.phone)
         $('#email').text(res.email)
@@ -41,7 +41,7 @@
         $('#vip-level').text(res.vip_level)
         $('#profile-image').attr('src', res.profile_image)
         $('#kyc').text(res.kyc_is_activated)
-        console.log(res.total_wagered)
+        //console.log(res.total_wagered)
         $('#total-wagered').text(res.total_wagered)
         $('#invitation-code').text(res.invited_code)
         $('#google-auth-activated').text(res.google_auth_is_activated)

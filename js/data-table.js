@@ -1,9 +1,9 @@
 ;(function ($) {
   'use strict'
   $(function () {
-    console.log(serverUrl)
+    //console.log(serverUrl)
     const lastPath = window.location.pathname.split('/').pop()
-    console.log(lastPath)
+    //console.log(lastPath)
     $('#order-listing').DataTable({
       aLengthMenu: [
         [5, 10, 15, -1],
@@ -50,7 +50,7 @@
           const loading = document.getElementById('loading-member-table')
           loading.innerText = newData < 1 ? 'No current loss Ranking' : ''
 
-          console.log(res.data)
+          //console.log(res.data)
           var tableBody = $('#member-table-body')
           tableBody.empty()
           // Clear existing data in the table
@@ -110,7 +110,7 @@
         if (newData && lastPath === 'memberManagement.html') {
           console.error('Error fetching data:', error)
           const loading = document.getElementById('loading-member-table')
-          console.log('load gotten')
+          //console.log('load gotten')
           loading.innerText = 'an error ocured'
           loading.style.color = 'red'
         }
@@ -139,7 +139,7 @@
       dataType: 'json',
       success: function (res) {
         if (res && lastPath === 'dailyStats.html') {
-          console.log(res)
+          //console.log(res)
           const loading = document.getElementById('loading-daily-report')
           loading.innerText = ''
         }
@@ -176,7 +176,7 @@
     //   method: 'GET',
     //   dataType: 'json',
     //   success: function (res) {
-    //     console.log(res)
+    //     //console.log(res)
     //     if (res.data) {
     //       const loading = document.getElementById('loading-daily')
     //       loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
@@ -213,7 +213,7 @@
       dataType: 'json',
       success: function (res) {
         if (res && lastPath === 'gamereport.html') {
-          console.log(res)
+          //console.log(res)
           const loading = document.getElementById('loading-daily-game')
           loading.innerText = ''
 
@@ -224,7 +224,7 @@
           const percentageHead = $('#daily-percentage')
           const betHead = $('#bet-count')
           const playerHead = $('#Player-count')
-          // console.log(playerHead, betHead, percentageHead, ggrHead, payoutHead, wagerHead, allHead)
+          // //console.log(playerHead, betHead, percentageHead, ggrHead, payoutHead, wagerHead, allHead)
           // Clear existing data in the table
           // tableBody.empty()
 
@@ -238,7 +238,7 @@
           wagerRow.append('<td>' + res.totalWagered?.crashDailyTotalWagered + '</td>')
           wagerRow.append('<td>' + res.totalWagered?.diceDailyTotalWagered + '</td>')
           wagerRow.append('<td>' + res.totalWagered?.minesDailyTotalWagered + '</td>')
-          console.log(res.totalWagered?.crashDailyTotalWagered)
+          //console.log(res.totalWagered?.crashDailyTotalWagered)
 
           // Append the row to the table body
           wagerHead.append(wagerRow)
@@ -274,7 +274,7 @@
           PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>')
           PlayerRow.append('<td>' + res.totalPlayerCount?.dicePlayerCount + '</td>')
           PlayerRow.append('<td>' + res.totalPlayerCount?.minesPlayerCount + '</td>')
-          // console.log(PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>'))
+          // //console.log(PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>'))
 
           // Append the row to the table body
           playerHead.append(PlayerRow)
@@ -296,8 +296,8 @@
       dataType: 'json',
       success: function (res) {
         if (res.data && lastPath === 'GGRMember.html') {
-          console.log(res)
-          // console.log(window.location.href)
+          //console.log(res)
+          // //console.log(window.location.href)
           const loading = document.getElementById('loading-ggr')
           loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
 

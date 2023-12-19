@@ -1146,7 +1146,7 @@
 
         // Initialize Firebase Authentication
         const auth = getAuth(app);
-        console.log(auth)
+        //console.log(auth)
 
         // JavaScript event handler for signup button click
         const form = document.getElementById('signupForm')
@@ -1162,18 +1162,18 @@
             const data = {
                 email, password, username, phoneNumber, comfirmPassword
             }
-            console.log(data)
+            //console.log(data)
             // Create user with email and password using Firebase
             await createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     // User signed up successfully
                     const user_id = userCredential.user.uid;
-                    console.log('User signed up. UserID:', user_id);
+                    //console.log('User signed up. UserID:', user_id);
 
 
                     // Collect all form data
                     const formData = { ...data, user_id }
-                    console.log(formData);
+                    //console.log(formData);
 
                     // Send complete data to the second server
                     fetch('http://localhost:8000/admin/create', {
@@ -1182,7 +1182,7 @@
                     })
                         .then(response => response.json())
                         .then(secondServerResponse => {
-                            console.log('User created successfully:', secondServerResponse);
+                            //console.log('User created successfully:', secondServerResponse);
                             // Add any additional logic or UI updates here
                         })
                         .catch(error => {
@@ -1220,7 +1220,7 @@
 
   // Initialize Firebase Authentication
   const auth = getAuth(app);
-  console.log(auth);
+  //console.log(auth);
 
   // Custom email validation method
   $.validator.addMethod("strictEmail", function(value, element) {
@@ -1277,7 +1277,7 @@
           .then(userCredential => {
             // User signed up successfully
             const user_id = userCredential.user.uid;
-            console.log('User signed up. UserID:', user_id);
+            //console.log('User signed up. UserID:', user_id);
 
             // Collect all form data
             const formData = {
@@ -1290,7 +1290,7 @@
               user_id
             };
 
-            console.log(formData);
+            //console.log(formData);
 
             // Send complete data to the second server
             fetch(serverUrl+'/admin/create', {
@@ -1302,7 +1302,7 @@
             })
               .then(response => response.json())
               .then(secondServerResponse => {
-                console.log('User created successfully:', secondServerResponse);
+                //console.log('User created successfully:', secondServerResponse);
                 // Add any additional logic or UI updates here
               })
               .catch(error => {
@@ -1316,10 +1316,10 @@
             // Handle errors
             const errorCode = error.code;
             const errorMessage = error.message;
-            // console.log(error)
+            // //console.log(error)
             console.error('Error signing up:', errorMessage);
             if(errorMessage=='Firebase: Error (auth/email-already-in-use).'){
-                console.log('hi')
+                //console.log('hi')
                 $("#message").text('Email already in use').css('color', 'red');
             }
             else{

@@ -1,7 +1,7 @@
 ;(function ($) {
   'use strict'
   $(function () {
-    console.log(serverUrl)
+    //console.log(serverUrl)
     const backgroundColors = {
       January: '#3498db',
       Febuary: '#e74c3c',
@@ -232,7 +232,7 @@
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-          console.log(data)
+          //console.log(data)
           if (data) {
             const loading = document.getElementById('loading-user')
             loading.innerText = ''
@@ -313,7 +313,7 @@
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-          console.log(data)
+          //console.log(data)
           if (data) {
             const loading = document.getElementById('loading-wager')
             loading.innerText = ''
@@ -503,7 +503,7 @@
               element.textContent = ''
             })
           }
-          console.log(data)
+          //console.log(data)
           // Get each of the displayed elements using jQuery
           $('#total-deposited-players').text('$' + parseInt(data.totalDepositedPlayers).toFixed(4))
           $('#total-deposited-players-type').text(
@@ -539,7 +539,7 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         if (res) {
           const loading = document.getElementById('loading-wager-table')
           loading.innerText = res.length < 1 ? 'No current Wager Ranking' : ''
@@ -581,7 +581,7 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         if (res) {
           const loading = document.getElementById('loading-won-table')
           loading.innerText = res.wonRanking.length < 1 ? 'No current won Ranking' : ''
@@ -624,7 +624,7 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         if (res) {
           const loading = document.getElementById('loading-loss-table')
           loading.innerText = res.lossRanking.length < 1 ? 'No current loss Ranking' : ''
