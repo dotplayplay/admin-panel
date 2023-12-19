@@ -60,7 +60,7 @@
             let row = $('<tr>')
             row.append(
               '<td><a href="' +
-                'http://127.0.0.1:5500/administration/pages/profile/profile.html?id=' +
+                '../pages/profile/profile.html?id=' +
                 member.user_id +
                 '" target="_blank">' +
                 member.user_id +
