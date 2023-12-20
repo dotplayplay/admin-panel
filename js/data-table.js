@@ -97,9 +97,9 @@
             )
             row.append('<td>' + member.last_login_ip + '</td>')
             row.append('<td><a href="' + member.transactionLogLink + '">View Log</a></td>')
-            row.append(
-              '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
-            )
+            // row.append(
+            //   '<td><div class="options-container"><div class="icon">&#9776;</div><ul class="options"><li>Option 1</li><li>Option 2</li><li>Option 3</li></ul></div></td>'
+            // )
 
             // Append the row to the table body
             tableBody.append(row)
@@ -133,163 +133,200 @@
     })
     // reportTables(serverUrl + '/admin/gamereport', '#game-report-table')
     // reportTables(serverUrl + '/admin/report', '#daily-report-table')
-    $.ajax({
-      url: serverUrl + '/admin/report',
-      method: 'GET',
-      dataType: 'json',
-      success: function (res) {
-        if (res && lastPath === 'dailyStats.html') {
-          //console.log(res)
+    if (lastPath === 'dailyStats.html') {
+      $.ajax({
+        url: serverUrl + '/admin/report',
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+          console.log(res)
           const loading = document.getElementById('loading-daily-report')
           loading.innerText = ''
-        }
-        var tableBody = $('#daily-report-table')
 
-        // Clear existing data in the table
-        tableBody.empty()
+          var tableBody = $('#daily-report-table')
 
-        // Iterate over each member data and append a new row
-        $.each(res, function (index, member) {
-          var row = $('<tr>')
-          row.append('<td>' + member.date + '</td>')
-          row.append('<td>' + member.dauCount + '</td>')
-          row.append('<td>' + member.totalWagered + '</td>')
-          row.append('<td>' + member.totalPayout + '</td>')
-          row.append('<td>' + member.ggr + '</td>')
+          // Clear existing data in the table
+          tableBody.empty()
 
-          // Append the row to the table body
-          tableBody.append(row)
-        })
-      },
+          // Iterate over each member data and append a new row
+          $.each(res.data, function (index, member) {
+            var row = $('<tr>')
+            row.append('<td>' + member.date + '</td>')
+            row.append('<td>' + member.dauCount + '</td>')
+            row.append('<td>' + member.userCount + '</td>')
+            row.append('<td>' + member.depositCount + '</td>')
+            row.append('<td>' + member.depositAmount + '</td>')
+            row.append('<td>' + member.reDepositAmount + '</td>')
+            row.append('<td>' + member.totalDeposit + '</td>')
+            row.append('<td>' + member.totalWithdrawalAmounts + '</td>')
+            row.append('<td>' + member.totalWagered + '</td>')
+            row.append('<td>' + member.totalPayout + '</td>')
+            row.append('<td>' + member.totalGGR + '</td>')
+            row.append('<td>' + member.deposit?.totalDepositBonus + '</td>')
+            row.append('<td>' + member.deposit?.totalUnlock + '</td>')
+            row.append('<td>' + member.vipLevelUp + '</td>')
+            row.append('<td>' + member.free?.luckySpin + '</td>')
+            row.append('<td>' + member.free?.rollCompetitions + '</td>')
+            row.append('<td>' + member.free?.dailyContest + '</td>')
+            row.append('<td>' + member.free?.medal + '</td>')
+            row.append('<td>' + member.free?.binggo + '</td>')
+            row.append('<td>' + member.free?.rain + '</td>')
+            row.append('<td>' + member.free?.coinDrop + '</td>')
+            row.append('<td>' + member.free?.totalUnlocked + '</td>')
+            row.append('<td>' + member.affiliate?.totalCommisionRekaBack + '</td>')
+            row.append('<td>' + member.affiliate?.totalDirectRefferal + '</td>')
+            row.append('<td>' + member.affiliate?.totalUnlocked + '</td>')
+            row.append('<td>' + member.otherBonuses?.recharge_balance + '</td>')
+            row.append('<td>' + member.otherBonuses?.week_cashback + '</td>')
+            row.append('<td>' + member.otherBonuses?.monthly_cashback + '</td>')
+            row.append('<td>' + member.dailyLotterys?.totalTicket + '</td>')
+            row.append('<td>' + member.dailyLotterys?.totalPrize + '</td>')
 
-      error: function (xhr, status, error) {
-        console.error('Error fetching data:', error)
-        if (lastPath === 'dailyStats.html') {
+            // Append the row to the table body
+            tableBody.append(row)
+          })
+        },
+
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error)
           const loading = document.getElementById('loading-daily-report')
           loading.innerText = ' an error ocurred'
           loading.style.color = 'red'
         }
-      }
-    })
+      })
+    }
+    if (lastPath === 'gamereport.html') {
+      $.ajax({
+        url: serverUrl + '/admin/gamereport',
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+          console.log(res)
+          const loading = document.getElementById('loading-daily')
+          loading.innerText = ''
+          var tableBody = $('#game-report-table')
+
+          // Clear existing data in the table
+          tableBody.empty()
+
+          // Iterate over each member data and append a new row
+          // $.each(res, function (index, member) {
+          var row = $('<tr>')
+          row.append('<td>' + res.totalWagered?.diceDailyTotalWagered + '</td>')
+          row.append('<td>' + res.totalWagered?.crashDailyTotalWagered + '</td>')
+          row.append('<td>' + res.totalWagered?.minesDailyTotalWagered + '</td>')
+          row.append('<td>' + res.totalPayout?.crashDailyPayout + '</td>')
+          row.append('<td>' + res.totalPayout?.diceDailyPayout + '</td>')
+          row.append('<td>' + res.totalPayout?.minesDailyPayout + '</td>')
+          row.append('<td>' + res.totalGGR?.crashDailyGGR + '</td>')
+          row.append('<td>' + res.totalGGR?.diceDailyGGR + '</td>')
+          row.append('<td>' + res.totalGGR?.minesDailyGGR + '</td>')
+          row.append('<td>' + res.totalGGRPercentage?.crashDailyGGRPercentage + '</td>')
+          row.append('<td>' + res.totalGGRPercentage?.diceDailyGGRPercentage + '</td>')
+          row.append('<td>' + res.totalGGRPercentage?.minesDailyGGRPercentage + '</td>')
+          row.append('<td>' + res.totalBetCount?.crashBetCount + '</td>')
+          row.append('<td>' + res.totalBetCount?.diceBetCount + '</td>')
+          row.append('<td>' + res.totalBetCount?.minesBetCount + '</td>')
+          row.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>')
+          row.append('<td>' + res.totalPlayerCount?.dicePlayerCount + '</td>')
+          row.append('<td>' + res.totalPlayerCount?.minesPlayerCount + '</td>')
+
+          // Append the row to the table body
+          tableBody.append(row)
+          // })
+        },
+
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error)
+          const loading = document.getElementById('loading-daily')
+          loading.innerText = ' an error ocurred'
+          loading.style.color = 'red'
+        }
+      })
+    }
     // $.ajax({
     //   url: serverUrl + '/admin/gamereport',
     //   method: 'GET',
     //   dataType: 'json',
     //   success: function (res) {
-    //     //console.log(res)
-    //     if (res.data) {
-    //       const loading = document.getElementById('loading-daily')
-    //       loading.innerText = res.data.length < 1 ? 'No current loss Ranking' : ''
-    //     }
-    //     var tableBody = $('#game-report-table')
+    //     if (res && lastPath === 'gamereport.html') {
+    //       //console.log(res)
+    //       const loading = document.getElementById('loading-daily-game')
+    //       loading.innerText = ''
 
-    //     // Clear existing data in the table
-    //     tableBody.empty()
+    //       const allHead = $('#all-head')
+    //       const wagerHead = $('#daily-total-wagered')
+    //       const payoutHead = $('#daily-payout')
+    //       const ggrHead = $('#daily-ggr')
+    //       const percentageHead = $('#daily-percentage')
+    //       const betHead = $('#bet-count')
+    //       const playerHead = $('#Player-count')
+    //       // //console.log(playerHead, betHead, percentageHead, ggrHead, payoutHead, wagerHead, allHead)
+    //       // Clear existing data in the table
+    //       // tableBody.empty()
 
-    //     // Iterate over each member data and append a new row
-    //     $.each(res.data, function (index, member) {
-    //       var row = $('<tr>')
-    //       row.append('<td>' + member.user_id + '</td>')
-    //       row.append('<td>' + member.username + '</td>')
-    //       row.append('<td>' + member.totalWagered + '</td>')
-    //       row.append('<td>' + member.totalPayout + '</td>')
-    //       row.append('<td>' + member.ggr + '</td>')
+    //       // Iterate over each member data and append a new row
+    //       // $.each(res.data, function (index, member) {
+    //       const headrow = $('<tr>')
+    //       headrow.append('<td>' + res.success + '</td>')
+    //       allHead.append(headrow)
+    //       // })
+    //       const wagerRow = $('<tr>')
+    //       wagerRow.append('<td>' + res.totalWagered?.crashDailyTotalWagered + '</td>')
+    //       wagerRow.append('<td>' + res.totalWagered?.diceDailyTotalWagered + '</td>')
+    //       wagerRow.append('<td>' + res.totalWagered?.minesDailyTotalWagered + '</td>')
+    //       //console.log(res.totalWagered?.crashDailyTotalWagered)
 
     //       // Append the row to the table body
-    //       tableBody.append(row)
-    //     })
+    //       wagerHead.append(wagerRow)
+    //       const payoutRow = $('<tr>')
+    //       payoutRow.append('<td>' + res.totalPayout?.crashDailyPayout + '</td>')
+    //       payoutRow.append('<td>' + res.totalPayout?.diceDailyPayout + '</td>')
+    //       payoutRow.append('<td>' + res.totalPayout?.minesDailyPayout + '</td>')
+
+    //       // Append the row to the table body
+    //       payoutHead.append(payoutRow)
+    //       const ggrRow = $('<tr>')
+    //       ggrRow.append('<td>' + res.totalGGR?.crashDailyGGR + '</td>')
+    //       ggrRow.append('<td>' + res.totalGGR?.diceDailyGGR + '</td>')
+    //       ggrRow.append('<td>' + res.totalGGR?.minesDailyGGR + '</td>')
+
+    //       // Append the row to the table body
+    //       ggrHead.append(ggrRow)
+    //       const percentageRow = $('<tr>')
+    //       percentageRow.append('<td>' + res.totalGGRPercentage?.crashDailyGGRPercentage + '</td>')
+    //       percentageRow.append('<td>' + res.totalGGRPercentage?.diceDailyGGRPercentage + '</td>')
+    //       percentageRow.append('<td>' + res.totalGGRPercentage?.minesDailyGGRPercentage + '</td>')
+
+    //       // Append the row to the table body
+    //       percentageHead.append(percentageRow)
+    //       const betRow = $('<tr>')
+    //       betRow.append('<td>' + res.totalBetCount?.crashBetCount + '</td>')
+    //       betRow.append('<td>' + res.totalBetCount?.diceBetCount + '</td>')
+    //       betRow.append('<td>' + res.totalBetCount?.minesBetCount + '</td>')
+
+    //       // Append the row to the table body
+    //       betHead.append(betRow)
+    //       const PlayerRow = $('<tr>')
+    //       PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>')
+    //       PlayerRow.append('<td>' + res.totalPlayerCount?.dicePlayerCount + '</td>')
+    //       PlayerRow.append('<td>' + res.totalPlayerCount?.minesPlayerCount + '</td>')
+    //       // //console.log(PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>'))
+
+    //       // Append the row to the table body
+    //       playerHead.append(PlayerRow)
+    //     }
     //   },
 
     //   error: function (xhr, status, error) {
-    //     console.error('Error fetching data:', error)
-    //     const loading = document.getElementById('loading-daily')
-    //     loading.innerText = ' an error ocurred'
-    //     loading.style.color = 'red'
+    //     if (lastPath === 'gamereport.html') {
+    //       console.error('Error fetching data:', error)
+    //       const loading = document.getElementById('loading-daily-game')
+    //       loading.innerText = ' an error ocurred'
+    //       loading.style.color = 'red'
+    //     }
     //   }
     // })
-    $.ajax({
-      url: serverUrl + '/admin/gamereport',
-      method: 'GET',
-      dataType: 'json',
-      success: function (res) {
-        if (res && lastPath === 'gamereport.html') {
-          //console.log(res)
-          const loading = document.getElementById('loading-daily-game')
-          loading.innerText = ''
-
-          const allHead = $('#all-head')
-          const wagerHead = $('#daily-total-wagered')
-          const payoutHead = $('#daily-payout')
-          const ggrHead = $('#daily-ggr')
-          const percentageHead = $('#daily-percentage')
-          const betHead = $('#bet-count')
-          const playerHead = $('#Player-count')
-          // //console.log(playerHead, betHead, percentageHead, ggrHead, payoutHead, wagerHead, allHead)
-          // Clear existing data in the table
-          // tableBody.empty()
-
-          // Iterate over each member data and append a new row
-          // $.each(res.data, function (index, member) {
-          const headrow = $('<tr>')
-          headrow.append('<td>' + res.success + '</td>')
-          allHead.append(headrow)
-          // })
-          const wagerRow = $('<tr>')
-          wagerRow.append('<td>' + res.totalWagered?.crashDailyTotalWagered + '</td>')
-          wagerRow.append('<td>' + res.totalWagered?.diceDailyTotalWagered + '</td>')
-          wagerRow.append('<td>' + res.totalWagered?.minesDailyTotalWagered + '</td>')
-          //console.log(res.totalWagered?.crashDailyTotalWagered)
-
-          // Append the row to the table body
-          wagerHead.append(wagerRow)
-          const payoutRow = $('<tr>')
-          payoutRow.append('<td>' + res.totalPayout?.crashDailyPayout + '</td>')
-          payoutRow.append('<td>' + res.totalPayout?.diceDailyPayout + '</td>')
-          payoutRow.append('<td>' + res.totalPayout?.minesDailyPayout + '</td>')
-
-          // Append the row to the table body
-          payoutHead.append(payoutRow)
-          const ggrRow = $('<tr>')
-          ggrRow.append('<td>' + res.totalGGR?.crashDailyGGR + '</td>')
-          ggrRow.append('<td>' + res.totalGGR?.diceDailyGGR + '</td>')
-          ggrRow.append('<td>' + res.totalGGR?.minesDailyGGR + '</td>')
-
-          // Append the row to the table body
-          ggrHead.append(ggrRow)
-          const percentageRow = $('<tr>')
-          percentageRow.append('<td>' + res.totalGGRPercentage?.crashDailyGGRPercentage + '</td>')
-          percentageRow.append('<td>' + res.totalGGRPercentage?.diceDailyGGRPercentage + '</td>')
-          percentageRow.append('<td>' + res.totalGGRPercentage?.minesDailyGGRPercentage + '</td>')
-
-          // Append the row to the table body
-          percentageHead.append(percentageRow)
-          const betRow = $('<tr>')
-          betRow.append('<td>' + res.totalBetCount?.crashBetCount + '</td>')
-          betRow.append('<td>' + res.totalBetCount?.diceBetCount + '</td>')
-          betRow.append('<td>' + res.totalBetCount?.minesBetCount + '</td>')
-
-          // Append the row to the table body
-          betHead.append(betRow)
-          const PlayerRow = $('<tr>')
-          PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>')
-          PlayerRow.append('<td>' + res.totalPlayerCount?.dicePlayerCount + '</td>')
-          PlayerRow.append('<td>' + res.totalPlayerCount?.minesPlayerCount + '</td>')
-          // //console.log(PlayerRow.append('<td>' + res.totalPlayerCount?.crashPlayerCount + '</td>'))
-
-          // Append the row to the table body
-          playerHead.append(PlayerRow)
-        }
-      },
-
-      error: function (xhr, status, error) {
-        if (lastPath === 'gamereport.html') {
-          console.error('Error fetching data:', error)
-          const loading = document.getElementById('loading-daily-game')
-          loading.innerText = ' an error ocurred'
-          loading.style.color = 'red'
-        }
-      }
-    })
     $.ajax({
       url: serverUrl + '/admin/ggrreport',
       method: 'GET',

@@ -17,7 +17,7 @@
       method: 'GET',
       dataType: 'json',
       success: function (res) {
-        //console.log(res)
+        console.log(res)
 
         $('#phone').text(res.phone)
         $('#email').text(res.email)

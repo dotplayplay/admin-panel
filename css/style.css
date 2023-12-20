@@ -34326,7 +34326,7 @@ div.tagsinput span.tag a {
 select {
   cursor: pointer !important;
 }
-.table th{
+.table th,.table td{
   white-space: nowrap;
 }
 #logo-head{
