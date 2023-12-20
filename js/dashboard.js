@@ -2,6 +2,7 @@
   "use strict";
   $(function () {
     console.log(serverUrl);
+    //console.log(serverUrl)
     const backgroundColors = {
       January: "#3498db",
       Febuary: "#e74c3c",
@@ -252,6 +253,7 @@
         dataType: "json",
         success: function (data) {
           console.log(data);
+          //console.log(data)
           if (data) {
             const loading = document.getElementById("loading-user");
             loading.innerText = "";
@@ -343,6 +345,7 @@
         dataType: "json",
         success: function (data) {
           console.log(data);
+          //console.log(data)
           if (data) {
             const loading = document.getElementById("loading-wager");
             loading.innerText = "";
@@ -578,6 +581,24 @@
           $("#total-lose-ranking-type").text(
             `${data.totalLoss.percent} ${data.totalLoss.type}`
           );
+          //console.log(data)
+          // Get each of the displayed elements using jQuery
+          $('#total-deposited-players').text('$' + parseInt(data.totalDepositedPlayers).toFixed(4))
+          $('#total-deposited-players-type').text(
+            `${data.totalDepositedPlayers.percent} ${data.totalDepositedPlayers.type}`
+          )
+          $('#total-gross-gaming-revenue').text('$' + parseInt(data.grossGamingRevenue).toFixed(4))
+          $('#total-gross-gaming-revenue-type').text(
+            `${data.grossGamingRevenue.percent} ${data.grossGamingRevenue.type}`
+          )
+          $('#total-player-balance').text('$' + parseInt(data.totalPlayerBalance).toFixed(4))
+          $('#total-player-balance-type').text(`${data.totalPlayerBalance.percent} ${data.totalPlayerBalance.type}`)
+          $('#total-wagered-ranking').text('$' + parseInt(data.totalWagered).toFixed(4))
+          $('#total-wagered-ranking-type').text(`${data.totalWagered.percent} ${data.totalWagered.type}`)
+          $('#total-win-ranking').text('$' + parseInt(data.totalWon).toFixed(4))
+          $('#total-win-ranking-type').text(`${data.totalWon.percent} ${data.totalWon.type}`)
+          $('#total-lose-ranking').text('$' + parseInt(data.totalLoss).toFixed(4))
+          $('#total-lose-ranking-type').text(`${data.totalLoss.percent} ${data.totalLoss.type}`)
         },
         error: function (xhr, status, error) {
           console.error("Error fetching data:", error);
@@ -597,6 +618,7 @@
       dataType: "json",
       success: function (res) {
         console.log(res);
+        //console.log(res)
         if (res) {
           const loading = document.getElementById("loading-wager-table");
           loading.innerText = res.length < 1 ? "No current Wager Ranking" : "";
@@ -644,6 +666,8 @@
       dataType: "json",
       success: function (res) {
         console.log(res);
+        //console.log(res)
+
         if (res) {
           const loading = document.getElementById("loading-won-table");
           loading.innerText =
@@ -692,6 +716,8 @@
       dataType: "json",
       success: function (res) {
         console.log(res);
+        //console.log(res)
+
         if (res) {
           const loading = document.getElementById("loading-loss-table");
           loading.innerText =
