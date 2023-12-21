@@ -900,7 +900,7 @@
                             </div>
                           </div>
                         </div> -->
-                    <div class="py-4" style="display: flex; justify-content: space-evenly; flex-wrap: wrap">
+                    <!-- <div class="py-4" style="display: flex; justify-content: space-evenly; flex-wrap: wrap">
                       <div class="col-md-4">
                         <p class="clearfix">
                           <span class="float-left"> Username </span>
@@ -1027,7 +1027,7 @@
                           <span class="float-right text-muted" id="monthly-wagered"> </span>
                         </p>
                       </div>
-                    </div>
+                    </div> -->
                     <h4 class="card-title" style="text-align: center">Profile Information</h4>
                     <div class="py-4" style="display: flex; justify-content: space-evenly; flex-wrap: wrap">
                       <div class="col-md-4">
@@ -1046,7 +1046,7 @@
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Mobile </span>
-                          <span class="float-right text-muted" id="phone"> </span>
+                          <span class="float-right text-muted" id="phone">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> 2FA </span>
@@ -1057,8 +1057,8 @@
                               name="membershipRadios"
                               id="membershipRadios1"
                               value=""
-                              checked
-                            />
+                              />
+                              <!-- checked -->
                           </span>
                         </p>
                         <p class="clearfix">
@@ -1157,7 +1157,7 @@
                         <p class="card-description">VIP Information</p>
                         <p class="clearfix">
                           <span class="float-left"> Level </span>
-                          <span class="float-right text-muted" id="vip-level"> </span>
+                          <span class="float-right text-muted" id="vip-level">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Rank </span>
@@ -1165,20 +1165,21 @@
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Total Wagered </span>
-                          <span class="float-right text-muted" id="total-wagered"> </span>
+                          <span class="float-right text-muted" id="total-wagered">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Roll Point Game </span>
-                          <span class="float-right text-muted" id="">
+                          <span class="float-right text-muted" >
                             <input
                               type="radio"
                               class="form-check-input"
                               name="membershipRadios"
-                              id="membershipRadios1"
-                              value=""
+                              id="roll-point-game"
                               checked
-                            />
-                          </span>
+                              />
+                              <!-- id="membershipRadios1" -->
+                              <!-- value="" -->
+                            </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Send Rain </span>
@@ -1187,10 +1188,11 @@
                               type="radio"
                               class="form-check-input"
                               name="membershipRadios"
-                              id="membershipRadios1"
-                              value=""
+                              id="send-rain"
                               checked
-                            />
+                              />
+                              <!-- value="" -->
+                              <!-- id="membershipRadios1" -->
                           </span>
                         </p>
                         <p class="clearfix">
@@ -1200,7 +1202,7 @@
                               type="radio"
                               class="form-check-input"
                               name="membershipRadios"
-                              id="membershipRadios1"
+                              id="receive-rain"
                               value=""
                               checked
                             />
@@ -1208,12 +1210,25 @@
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> sending Coindrop </span>
-                          <span class="float-right text-muted" id="fa-activated">
+                          <span class="float-right text-muted" id="">
                             <input
                               type="radio"
                               class="form-check-input"
                               name="membershipRadios"
-                              id="membershipRadios1"
+                              id="sending-coindrop"
+                              value=""
+                              checked
+                            />
+                          </span>
+                        </p>
+                        <p class="clearfix">
+                          <span class="float-left"> Recieving Coindrop </span>
+                          <span class="float-right text-muted" id="">
+                            <input
+                              type="radio"
+                              class="form-check-input"
+                              name="membershipRadios"
+                              id="recieving-coindrop"
                               value=""
                               checked
                             />
@@ -1305,19 +1320,19 @@
                         <p class="card-description">Account Information</p>
                         <p class="clearfix">
                           <span class="float-left"> Last Login Date </span>
-                          <span class="float-right text-muted" id="last-login-ip"> </span>
+                          <span class="float-right text-muted" id="last-login-ip">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Last Ip Address </span>
-                          <span class="float-right text-muted" id="last-login-at"> </span>
+                          <span class="float-right text-muted" id="last-login-at">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Last Deposit  </span>
-                          <span class="float-right text-muted" id="last-deposit">  </span>
+                          <span class="float-right text-muted" id="last-deposit"> null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Last Withdrawal </span>
-                          <span class="float-right text-muted" id="last-withdrawal"> </span>
+                          <span class="float-right text-muted" id="last-withdrawal">null </span>
                         </p>
                         
                       </div>
@@ -1325,15 +1340,15 @@
                         <p class="card-description">Affliate Information</p>
                         <p class="clearfix">
                           <span class="float-left"> Referral Code </span>
-                          <span class="float-right text-muted" id="Referral"> </span>
+                          <span class="float-right text-muted" id="invitation-code">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> No. of Invitees </span>
-                          <span class="float-right text-muted" id="invitee-no"> </span>
+                          <span class="float-right text-muted" id="invitee-no">null </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Commision Method </span>
-                          <span class="float-right text-muted" id="commision-method"> </span>
+                          <span class="float-right text-muted" id="commision-method"> null</span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left"> Suspend </span>
@@ -1479,34 +1494,8 @@
 
                         
                       </div>
-                      <div class="col-md-4">
-                        <p class="card-description">Affliate Information</p>
-                        <p class="clearfix">
-                          <span class="float-left"> Referral Code </span>
-                          <span class="float-right text-muted" id="Referral"> </span>
-                        </p>
-                        <p class="clearfix">
-                          <span class="float-left"> No. of Invitees </span>
-                          <span class="float-right text-muted" id="invitee-no"> </span>
-                        </p>
-                        <p class="clearfix">
-                          <span class="float-left"> Commision Method </span>
-                          <span class="float-right text-muted" id="commision-method"> </span>
-                        </p>
-                        <p class="clearfix">
-                          <span class="float-left"> Suspend </span>
-                          <span class="float-right text-muted" id="">
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              name="membershipRadios"
-                              id="membershipRadios1"
-                              value=""
-                              checked
-                            />
-                          </span>
-                        </p>
-                        </div>
+                      <div class="col-md-4"></div>
+                      
                   </div>
                   <!-- <button class="btn btn-primary btn-block">Preview</button> -->
                   <!-- <div class="col-lg-8 pl-lg-5"> -->
